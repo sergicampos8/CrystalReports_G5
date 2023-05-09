@@ -30,8 +30,10 @@ namespace CrystalReports_G5
         private void InitializeComponent()
         {
             this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
-            this.crystalReportViewer2 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.ClassificacioPerGP1 = new CrystalReports_G5.ClassificacioPerGP();
+            this.crystalReportViewer2 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            this.RacingTeamInfo21 = new CrystalReports_G5.RacingTeamInfo2();
+            this.RacingTeamInfo22 = new CrystalReports_G5.RacingTeamInfo2();
             this.SuspendLayout();
             // 
             // crystalReportViewer1
@@ -53,7 +55,7 @@ namespace CrystalReports_G5
             this.crystalReportViewer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.crystalReportViewer2.Location = new System.Drawing.Point(0, 0);
             this.crystalReportViewer2.Name = "crystalReportViewer2";
-            this.crystalReportViewer2.ReportSource = this.ClassificacioPerGP1;
+            this.crystalReportViewer2.ReportSource = this.RacingTeamInfo22;
             this.crystalReportViewer2.Size = new System.Drawing.Size(800, 450);
             this.crystalReportViewer2.TabIndex = 1;
             // 
@@ -75,6 +77,8 @@ namespace CrystalReports_G5
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer2;
         private ClassificacioPerGP ClassificacioPerGP1;
+        private RacingTeamInfo2 RacingTeamInfo21;
+        private RacingTeamInfo2 RacingTeamInfo22;
     }
 }
 
