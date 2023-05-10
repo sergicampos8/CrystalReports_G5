@@ -16,14 +16,14 @@ namespace CrystalReports_G5 {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ClassificacioPerGP : ReportClass {
+    public class GeneralStandings : ReportClass {
         
-        public ClassificacioPerGP() {
+        public GeneralStandings() {
         }
         
         public override string ResourceName {
             get {
-                return "ClassificacioPerGP.rpt";
+                return "GeneralStandings.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace CrystalReports_G5 {
         
         public override string FullResourceName {
             get {
-                return "CrystalReports_G5.ClassificacioPerGP.rpt";
+                return "CrystalReports_G5.GeneralStandings.rpt";
             }
             set {
                 // Do nothing
@@ -66,7 +66,7 @@ namespace CrystalReports_G5 {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection3 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace CrystalReports_G5 {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection2 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,7 +82,7 @@ namespace CrystalReports_G5 {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -90,7 +90,7 @@ namespace CrystalReports_G5 {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection2 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[5];
             }
@@ -98,33 +98,17 @@ namespace CrystalReports_G5 {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection3 {
-            get {
-                return this.ReportDefinition.Sections[6];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
-            get {
-                return this.ReportDefinition.Sections[7];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
-                return this.ReportDefinition.Sections[8];
+                return this.ReportDefinition.Sections[6];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedClassificacioPerGP : Component, ICachedReport {
+    public class CachedGeneralStandings : Component, ICachedReport {
         
-        public CachedClassificacioPerGP() {
+        public CachedGeneralStandings() {
         }
         
         [Browsable(false)]
@@ -161,7 +145,7 @@ namespace CrystalReports_G5 {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ClassificacioPerGP rpt = new ClassificacioPerGP();
+            GeneralStandings rpt = new GeneralStandings();
             rpt.Site = this.Site;
             return rpt;
         }
