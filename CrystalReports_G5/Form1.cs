@@ -16,5 +16,10 @@ namespace CrystalReports_G5
         {
             InitializeComponent();
         }
+
+        private void ClassificacioPerGP1_InitReport(object sender, EventArgs e)
+        {
+
+        }
     }
 }
