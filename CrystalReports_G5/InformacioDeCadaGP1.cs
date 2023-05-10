@@ -16,14 +16,14 @@ namespace CrystalReports_G5 {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class GeneralStandings : ReportClass {
+    public class InformacioDeCadaGP : ReportClass {
         
-        public GeneralStandings() {
+        public InformacioDeCadaGP() {
         }
         
         public override string ResourceName {
             get {
-                return "GeneralStandings.rpt";
+                return "InformacioDeCadaGP.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace CrystalReports_G5 {
         
         public override string FullResourceName {
             get {
-                return "CrystalReports_G5.GeneralStandings.rpt";
+                return "CrystalReports_G5.InformacioDeCadaGP.rpt";
             }
             set {
                 // Do nothing
@@ -66,7 +66,7 @@ namespace CrystalReports_G5 {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace CrystalReports_G5 {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,33 +82,17 @@ namespace CrystalReports_G5 {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section PageFooterSection2 {
             get {
                 return this.ReportDefinition.Sections[4];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
-            get {
-                return this.ReportDefinition.Sections[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
-            get {
-                return this.ReportDefinition.Sections[6];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedGeneralStandings : Component, ICachedReport {
+    public class CachedInformacioDeCadaGP : Component, ICachedReport {
         
-        public CachedGeneralStandings() {
+        public CachedInformacioDeCadaGP() {
         }
         
         [Browsable(false)]
@@ -145,7 +129,7 @@ namespace CrystalReports_G5 {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            GeneralStandings rpt = new GeneralStandings();
+            InformacioDeCadaGP rpt = new InformacioDeCadaGP();
             rpt.Site = this.Site;
             return rpt;
         }
