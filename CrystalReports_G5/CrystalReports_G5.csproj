@@ -71,6 +71,12 @@
       <DependentUpon>GeneralStandings.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="InformacioDeCadaGP1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InformacioDeCadaGP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RacingTeamInfo2.cs">
@@ -89,6 +95,10 @@
     <EmbeddedResource Include="GeneralStandings.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>GeneralStandings.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InformacioDeCadaGP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InformacioDeCadaGP1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
