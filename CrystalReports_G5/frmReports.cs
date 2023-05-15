@@ -10,14 +10,21 @@ using System.Windows.Forms;
 
 namespace CrystalReports_G5
 {
-    public partial class Form1 : Form
+    public partial class frmReports : Form
     {
-        public Form1()
+        public frmReports()
         {
             InitializeComponent();
         }
 
-        private void ClassificacioPerGP1_InitReport(object sender, EventArgs e)
+        private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Reports frm = new Reports();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void frmReports_Load(object sender, EventArgs e)
         {
 
         }

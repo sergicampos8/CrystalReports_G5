@@ -1,7 +1,7 @@
 ﻿
 namespace CrystalReports_G5
 {
-    partial class Form1
+    partial class Reports
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -29,62 +29,75 @@ namespace CrystalReports_G5
         /// </summary>
         private void InitializeComponent()
         {
-            this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.crystalReportViewer2 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.RacingTeamInfo22 = new CrystalReports_G5.RacingTeamInfo2();
             this.RacingTeamInfo21 = new CrystalReports_G5.RacingTeamInfo2();
             this.ClassificacioPerGP1 = new CrystalReports_G5.ClassificacioPerGP();
-            this.GeneralStandings1 = new CrystalReports_G5.GeneralStandings();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // crystalReportViewer1
-            // 
-            this.crystalReportViewer1.ActiveViewIndex = -1;
-            this.crystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.crystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.crystalReportViewer1.Location = new System.Drawing.Point(0, 0);
-            this.crystalReportViewer1.Name = "crystalReportViewer1";
-            this.crystalReportViewer1.Size = new System.Drawing.Size(1229, 722);
-            this.crystalReportViewer1.TabIndex = 0;
             // 
             // crystalReportViewer2
             // 
-            this.crystalReportViewer2.ActiveViewIndex = 0;
+            this.crystalReportViewer2.ActiveViewIndex = -1;
             this.crystalReportViewer2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.crystalReportViewer2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crystalReportViewer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.crystalReportViewer2.Location = new System.Drawing.Point(0, 0);
+            this.crystalReportViewer2.Location = new System.Drawing.Point(-12, 40);
             this.crystalReportViewer2.Name = "crystalReportViewer2";
-            this.crystalReportViewer2.ReportSource = this.GeneralStandings1;
-            this.crystalReportViewer2.Size = new System.Drawing.Size(1229, 722);
+            this.crystalReportViewer2.Size = new System.Drawing.Size(1229, 701);
             this.crystalReportViewer2.TabIndex = 1;
+            this.crystalReportViewer2.Load += new System.EventHandler(this.crystalReportViewer2_Load);
             // 
             // ClassificacioPerGP1
             // 
             this.ClassificacioPerGP1.InitReport += new System.EventHandler(this.ClassificacioPerGP1_InitReport);
             // 
-            // Form1
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "ClassificacioPerGP.rpt",
+            "InformacioDeCadaGP.rpt",
+            "RacingTeamInfo2.rpt"});
+            this.comboBox1.Location = new System.Drawing.Point(195, 10);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(202, 24);
+            this.comboBox1.TabIndex = 2;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(33, 10);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(111, 24);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Select Report";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // Reports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1229, 722);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.crystalReportViewer2);
-            this.Controls.Add(this.crystalReportViewer1);
-            this.Name = "Form1";
+            this.Name = "Reports";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Reports_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer2;
         private ClassificacioPerGP ClassificacioPerGP1;
         private RacingTeamInfo2 RacingTeamInfo21;
         private RacingTeamInfo2 RacingTeamInfo22;
-        private GeneralStandings GeneralStandings1;
+        private InformacioDeCadaGP InformaciodeCadaGP1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
 
