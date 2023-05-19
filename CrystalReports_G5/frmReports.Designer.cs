@@ -43,22 +43,22 @@ namespace CrystalReports_G5
             this.moreOptionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // reportsToolStripMenuItem
             // 
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(74, 26);
             this.reportsToolStripMenuItem.Text = "Reports";
             this.reportsToolStripMenuItem.Click += new System.EventHandler(this.reportsToolStripMenuItem_Click);
             // 
             // moreOptionsToolStripMenuItem
             // 
             this.moreOptionsToolStripMenuItem.Name = "moreOptionsToolStripMenuItem";
-            this.moreOptionsToolStripMenuItem.Size = new System.Drawing.Size(114, 24);
-            this.moreOptionsToolStripMenuItem.Text = "More Options";
+            this.moreOptionsToolStripMenuItem.Size = new System.Drawing.Size(107, 26);
+            this.moreOptionsToolStripMenuItem.Text = "F1 Stats XML";
             // 
             // frmReports
             // 

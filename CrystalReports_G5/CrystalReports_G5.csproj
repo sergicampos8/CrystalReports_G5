@@ -53,12 +53,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="F1StatsXML.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="F1StatsXML.Designer.cs">
+      <DependentUpon>F1StatsXML.cs</DependentUpon>
     </Compile>
+    <Compile Include="Functions\FuncionesAuxiliares.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ClassificacioPerGP.cs">
       <AutoGen>True</AutoGen>
@@ -99,8 +100,8 @@
       <LastGenOutput>ClassificacioPerGP.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="F1StatsXML.resx">
+      <DependentUpon>F1StatsXML.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports.resx">
       <DependentUpon>Reports.cs</DependentUpon>

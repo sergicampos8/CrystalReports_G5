@@ -1,7 +1,7 @@
 ﻿
 namespace CrystalReports_G5
 {
-    partial class Form1
+    partial class F1StatsXML
     {
         /// <summary>
         /// Required designer variable.
