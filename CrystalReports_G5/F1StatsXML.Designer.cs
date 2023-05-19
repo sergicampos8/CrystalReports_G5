@@ -122,6 +122,7 @@ namespace CrystalReports_G5
             this.TypeEmployeeMultiBox.Name = "TypeEmployeeMultiBox";
             this.TypeEmployeeMultiBox.Size = new System.Drawing.Size(161, 24);
             this.TypeEmployeeMultiBox.TabIndex = 7;
+            this.TypeEmployeeMultiBox.SelectedIndexChanged += new System.EventHandler(this.TypeEmployeeMultiBox_SelectedIndexChanged);
             // 
             // NameMultiBox
             // 
@@ -180,7 +181,7 @@ namespace CrystalReports_G5
             this.statisticsbutton.Text = "Statistics";
             this.statisticsbutton.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // F1StatsXML
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -198,7 +199,7 @@ namespace CrystalReports_G5
             this.Controls.Add(this.LabelFile);
             this.Controls.Add(this.Title);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "Form1";
+            this.Name = "F1StatsXML";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

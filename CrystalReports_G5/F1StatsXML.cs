@@ -41,5 +41,10 @@ namespace CrystalReports_G5
         {
             
         }
+
+        private void TypeEmployeeMultiBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
