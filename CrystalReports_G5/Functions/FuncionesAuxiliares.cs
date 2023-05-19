@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,14 +27,22 @@ namespace CrystalReports_G5.Functions
             return rutaArchivo;
         }
 
-        public void ReadFile(string filePath)
+        public ArrayList ReadFile(string filePath)
         {
+            ArrayList ArrayListXML = new ArrayList();
 
             if (File.Exists(filePath))
             {
                 try
                 {
-                    string content = File.ReadAllText(filePath);
+                    using (StreamReader sr = new StreamReader(filePath))
+                    {
+                        string linea;
+                        while ((linea = sr.ReadLine()) != null)
+                        {
+                            ArrayListXML.Add(linea);
+                        }
+                    }
                     // Hacer algo con el contenido del archivo
                     MessageBox.Show( "Archivo " + filePath + " leído Correctamente");
                 }
@@ -46,6 +55,16 @@ namespace CrystalReports_G5.Functions
             {
                 MessageBox.Show("El archivo no existe.", "Archivo no Encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
+
+            // Imprimir las líneas del archivo
+            //Console.WriteLine("Contenido del archivo:");
+            //foreach (string linea in ArrayListXML)
+            //{
+            //    Console.WriteLine(linea);
+            //}
+
+            return ArrayListXML;
         }
     }
 }
