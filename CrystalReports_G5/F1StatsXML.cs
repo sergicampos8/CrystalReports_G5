@@ -26,7 +26,9 @@ namespace CrystalReports_G5
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
-
+            string filePath = FileBox.Text.Trim();
+            FuncionesAuxiliares funcionesAuxiliares = new FuncionesAuxiliares();
+            funcionesAuxiliares.ReadFile(filePath);
         }
 
         private void ButtonBrowse_Click(object sender, EventArgs e)
