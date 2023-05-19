@@ -84,7 +84,6 @@ namespace CrystalReports_G5
             this.FileBox.Location = new System.Drawing.Point(181, 236);
             this.FileBox.Multiline = true;
             this.FileBox.Name = "FileBox";
-            this.FileBox.ReadOnly = true;
             this.FileBox.Size = new System.Drawing.Size(448, 30);
             this.FileBox.TabIndex = 4;
             this.FileBox.TextChanged += new System.EventHandler(this.FileBox_TextChanged);
@@ -180,7 +179,7 @@ namespace CrystalReports_G5
             this.statisticsbutton.Text = "Statistics";
             this.statisticsbutton.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // F1StatsXML
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -198,7 +197,7 @@ namespace CrystalReports_G5
             this.Controls.Add(this.LabelFile);
             this.Controls.Add(this.Title);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "Form1";
+            this.Name = "F1StatsXML";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
