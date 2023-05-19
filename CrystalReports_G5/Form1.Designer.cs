@@ -114,6 +114,10 @@ namespace CrystalReports_G5
             // TypeEmployeeMultiBox
             // 
             this.TypeEmployeeMultiBox.FormattingEnabled = true;
+            this.TypeEmployeeMultiBox.Items.AddRange(new object[] {
+            "Grand Prix",
+            "Pilot",
+            "Racing Team"});
             this.TypeEmployeeMultiBox.Location = new System.Drawing.Point(146, 295);
             this.TypeEmployeeMultiBox.Name = "TypeEmployeeMultiBox";
             this.TypeEmployeeMultiBox.Size = new System.Drawing.Size(161, 24);
