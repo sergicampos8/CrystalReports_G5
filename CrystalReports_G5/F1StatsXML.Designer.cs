@@ -121,6 +121,7 @@ namespace CrystalReports_G5
             this.TypeEmployeeMultiBox.Name = "TypeEmployeeMultiBox";
             this.TypeEmployeeMultiBox.Size = new System.Drawing.Size(161, 24);
             this.TypeEmployeeMultiBox.TabIndex = 7;
+            this.TypeEmployeeMultiBox.SelectedIndexChanged += new System.EventHandler(this.TypeEmployeeMultiBox_SelectedIndexChanged);
             // 
             // NameMultiBox
             // 

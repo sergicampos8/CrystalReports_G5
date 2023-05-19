@@ -16,7 +16,7 @@ namespace CrystalReports_G5
         {
             InitializeComponent();
         }
-
+        
         private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Reports frm = new Reports();
@@ -26,7 +26,7 @@ namespace CrystalReports_G5
 
         private void frmReports_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
