@@ -84,7 +84,6 @@ namespace CrystalReports_G5
             this.FileBox.Location = new System.Drawing.Point(181, 236);
             this.FileBox.Multiline = true;
             this.FileBox.Name = "FileBox";
-            this.FileBox.ReadOnly = true;
             this.FileBox.Size = new System.Drawing.Size(448, 30);
             this.FileBox.TabIndex = 4;
             this.FileBox.TextChanged += new System.EventHandler(this.FileBox_TextChanged);
