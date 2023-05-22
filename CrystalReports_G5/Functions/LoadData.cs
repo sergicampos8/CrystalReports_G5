@@ -11,6 +11,27 @@ namespace CrystalReports_G5
 {
     class LoadData
     {
+        public static string gp_name, pilot_name, score; 
+
+
+        public static void FillDataInLists(List<string> lines, List<string> drivers, List<string> rteams, List<string> GPs)
+        {
+
+            string elementname, data;
+            bool rightelement;
+            foreach (string linea in lines)
+            {
+                elementname = GetElementName(linea);
+                rightelement = Checkelement(elementname);
+
+                if (rightelement)
+                {
+                    data = GetElementData(linea);
+                    DataInList(data, elementname, drivers, rteams, GPs);
+                }
+            }
+        }
+
         public static string BrowseFile()
         {
             string rutaArchivo = "";
@@ -109,7 +130,7 @@ namespace CrystalReports_G5
         public static bool Checkelement(string elementname)
         {
             bool check = false;
-            if (elementname == "GPName" || elementname == "Name" || elementname == "RacingTeam")
+            if (elementname == "GPName" || elementname == "Name" || elementname == "RacingTeam" || elementname == "Score")
             {
                 check = true;
             }
@@ -117,45 +138,41 @@ namespace CrystalReports_G5
             return check;
         }
 
-        public static void FillDataInLists(List<string> lines, List<string> drivers, List<string> rteams, List<string> GPs)
-        {
-
-            string elementname, data;
-            bool rightelement;
-            foreach (string linea in lines)
-            {
-                elementname = GetElementName(linea);
-                rightelement = Checkelement(elementname);
-
-                if (rightelement)
-                {
-                    data = GetElementData(linea);
-                    DataInList(data, elementname, drivers, rteams, GPs);
-
-            
-                }
-            }
-        }
-
         public static void DataInList(string data, string elementname, List<string> drivers, List<string> rteams, List<string> GPs)
         {
             if (elementname == "GPName")
             {
+                gp_name = data;
                 if(Distinct(GPs, data))
                     GPs.Add(data);
             }
+            else if (elementname == "Score")
+            {
+                score = data;
+            }
+            //Sabiendo que cada vez que el nombre cambie queremos guardar los puntos, iniciamos la funcion de guardar puntos en este if 
             else if (elementname == "Name")
             {
+                pilot_name = data;
                 if (Distinct(drivers, data))
                     drivers.Add(data);
+                PointsToDictionary(F1StatsXML.PointsRecord, gp_name, pilot_name, score);
             }
             else
             {
                 if (Distinct(rteams, data))
                     rteams.Add(data);
             }
-
         }
+
+        public static void PointsToDictionary(Dictionary<string, string> Pointsrecord, string gp_name, string pilot_name, string score)
+        {
+            string id;
+            //ID con formato GPNombre_NomApeApe
+            id = DictionaryPoints.GetPointsId(gp_name, pilot_name);
+            Pointsrecord.Add(id, score);
+        }
+
 
         public static void WriteList(List<string> list)
         {
@@ -165,6 +182,15 @@ namespace CrystalReports_G5
             }
 
         }
+
+        public static void WriteDictionary(Dictionary<string, string> dictionary)
+        {
+            foreach (KeyValuePair<string, string> element in dictionary)
+            {
+                Console.WriteLine("Key = {0}, Value = {1}",element.Key, element.Value);
+            }
+        }
+
 
         public static bool Distinct(List<string> list, string data)
         {
@@ -179,10 +205,7 @@ namespace CrystalReports_G5
             return check;
         }
 
-        public static void PointsToDictionary(Dictionary<string,string> Pointsrecord)
-        {
 
-        }
 
     }
 }
