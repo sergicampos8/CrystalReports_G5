@@ -11,7 +11,7 @@ namespace CrystalReports_G5
         List<string> ListRTeams = new List<string>();
         List<string> ListGP = new List<string>();
         List<string> lines = new List<string>();
-        Dictionary<string, string> PointsRecord = new Dictionary<string,string>();
+        public static Dictionary<string, string> PointsRecord = new Dictionary<string,string>();
 
 
         public F1StatsXML()
@@ -66,7 +66,6 @@ namespace CrystalReports_G5
         {
 
         }
-
         private void LabelFile_Click(object sender, EventArgs e)
         {
 

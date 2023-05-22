@@ -4,10 +4,10 @@ namespace CrystalReports_G5
 {
     class DictionaryPoints
     {
-        private static string GetGpId(string input)
+        private static string GetGpId(string gp)
         {
             string result = "";
-            foreach (char c in input)
+            foreach (char c in gp)
             {
                 if (char.IsLetterOrDigit(c))
                 {
@@ -17,42 +17,42 @@ namespace CrystalReports_G5
             return result;
         }
 
-        public static string GetPilotId(string input)
+        public static string GetPilotId(string pilot)
         {
-            string[] words = input.Split(' '); // Separar las palabras por espacio
+            string[] words = pilot.Split(' '); // Separar las palabras por espacio
             string result = "";
 
             for (int i = 0; i < words.Length; i++)
             {
-                string firstCharacters = "";
+                string p_id = "";
 
                 if (words[i].Length >= 3)
                 {
-                    firstCharacters = words[i].Substring(0, 3); // Tomar los primeros tres caracteres
+                    p_id = words[i].Substring(0, 3); // Tomar los primeros tres caracteres
                 }
                 else if (words[i].Length == 2)
                 {
-                    firstCharacters = words[i].Substring(0, 2); // Tomar los primeros dos caracteres
+                    p_id = words[i].Substring(0, 2); // Tomar los primeros dos caracteres
                 }
                 else if (words[i].Length == 1)
                 {
-                    firstCharacters = words[i].Substring(0, 1); // Tomar el primer caracter
+                    p_id = words[i].Substring(0, 1); // Tomar el primer caracter
                 }
 
-                firstCharacters = char.ToUpper(firstCharacters[0]) + firstCharacters.Substring(1); // Convertir el primer carácter a mayúscula
+                //firstCharacters = char.ToUpper(firstCharacters[0]) + firstCharacters.Substring(1); // Convertir el primer carácter a mayúscula
 
-                result += firstCharacters;
+                result += p_id;
 
-                if (i < words.Length - 1)
-                {
-                    result += ""; // Agregar espacio como separador, excepto para la última palabra
-                }
+                //if (i < words.Length - 1)
+                //{
+                //    result += ""; // Agregar espacio como separador, excepto para la última palabra
+                //}
             }
 
             return result;
         }
 
-        private static string GetPointsId(string gp_name, string pilot_name)
+        public static string GetPointsId(string gp_name, string pilot_name)
         {
             string id = GetGpId(gp_name) + "_" + GetPilotId(pilot_name);
             return id;
