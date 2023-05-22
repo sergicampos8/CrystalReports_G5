@@ -9,6 +9,5 @@ namespace CrystalReports_G5
     class ShowData
     {
        
-        //public static 
     }
 }
