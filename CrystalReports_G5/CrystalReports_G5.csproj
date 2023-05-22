@@ -59,7 +59,8 @@
     <Compile Include="F1StatsXML.Designer.cs">
       <DependentUpon>F1StatsXML.cs</DependentUpon>
     </Compile>
-    <Compile Include="Functions\FuncionesAuxiliares.cs" />
+    <Compile Include="Functions\ShowData.cs" />
+    <Compile Include="Functions\LoadData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ClassificacioPerGP.cs">
       <AutoGen>True</AutoGen>

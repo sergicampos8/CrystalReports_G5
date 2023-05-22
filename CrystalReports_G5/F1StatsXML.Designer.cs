@@ -60,7 +60,7 @@ namespace CrystalReports_G5
             // 
             this.Title.AutoSize = true;
             this.Title.Font = new System.Drawing.Font("Bauhaus 93", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Title.Location = new System.Drawing.Point(594, 100);
+            this.Title.Location = new System.Drawing.Point(625, 89);
             this.Title.Name = "Title";
             this.Title.Size = new System.Drawing.Size(380, 39);
             this.Title.TabIndex = 2;
@@ -76,6 +76,7 @@ namespace CrystalReports_G5
             this.LabelFile.Size = new System.Drawing.Size(54, 25);
             this.LabelFile.TabIndex = 3;
             this.LabelFile.Text = "File:";
+            this.LabelFile.Click += new System.EventHandler(this.LabelFile_Click);
             // 
             // FileBox
             // 
@@ -84,14 +85,14 @@ namespace CrystalReports_G5
             this.FileBox.Location = new System.Drawing.Point(181, 236);
             this.FileBox.Multiline = true;
             this.FileBox.Name = "FileBox";
-            this.FileBox.Size = new System.Drawing.Size(448, 30);
+            this.FileBox.Size = new System.Drawing.Size(506, 30);
             this.FileBox.TabIndex = 4;
             this.FileBox.TextChanged += new System.EventHandler(this.FileBox_TextChanged);
             // 
             // ButtonBrowse
             // 
             this.ButtonBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonBrowse.Location = new System.Drawing.Point(651, 236);
+            this.ButtonBrowse.Location = new System.Drawing.Point(709, 236);
             this.ButtonBrowse.Name = "ButtonBrowse";
             this.ButtonBrowse.Size = new System.Drawing.Size(50, 30);
             this.ButtonBrowse.TabIndex = 5;
@@ -102,9 +103,9 @@ namespace CrystalReports_G5
             // LoadButton
             // 
             this.LoadButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoadButton.Location = new System.Drawing.Point(721, 236);
+            this.LoadButton.Location = new System.Drawing.Point(795, 236);
             this.LoadButton.Name = "LoadButton";
-            this.LoadButton.Size = new System.Drawing.Size(179, 30);
+            this.LoadButton.Size = new System.Drawing.Size(255, 30);
             this.LoadButton.TabIndex = 6;
             this.LoadButton.Text = "Load";
             this.LoadButton.UseVisualStyleBackColor = true;
@@ -117,29 +118,31 @@ namespace CrystalReports_G5
             "Grand Prix",
             "Pilot",
             "Racing Team"});
-            this.TypeEmployeeMultiBox.Location = new System.Drawing.Point(146, 295);
+            this.TypeEmployeeMultiBox.Location = new System.Drawing.Point(347, 301);
             this.TypeEmployeeMultiBox.Name = "TypeEmployeeMultiBox";
-            this.TypeEmployeeMultiBox.Size = new System.Drawing.Size(161, 24);
+            this.TypeEmployeeMultiBox.Size = new System.Drawing.Size(200, 24);
             this.TypeEmployeeMultiBox.TabIndex = 7;
             this.TypeEmployeeMultiBox.SelectedIndexChanged += new System.EventHandler(this.TypeEmployeeMultiBox_SelectedIndexChanged);
             // 
             // NameMultiBox
             // 
             this.NameMultiBox.FormattingEnabled = true;
-            this.NameMultiBox.Location = new System.Drawing.Point(426, 295);
+            this.NameMultiBox.Location = new System.Drawing.Point(559, 301);
             this.NameMultiBox.Name = "NameMultiBox";
-            this.NameMultiBox.Size = new System.Drawing.Size(161, 24);
+            this.NameMultiBox.Size = new System.Drawing.Size(200, 24);
             this.NameMultiBox.TabIndex = 8;
+            this.NameMultiBox.SelectedIndexChanged += new System.EventHandler(this.NameMultiBox_SelectedIndexChanged);
             // 
             // SaveAsCSVbutton
             // 
             this.SaveAsCSVbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SaveAsCSVbutton.Location = new System.Drawing.Point(681, 288);
+            this.SaveAsCSVbutton.Location = new System.Drawing.Point(801, 288);
             this.SaveAsCSVbutton.Name = "SaveAsCSVbutton";
-            this.SaveAsCSVbutton.Size = new System.Drawing.Size(193, 37);
+            this.SaveAsCSVbutton.Size = new System.Drawing.Size(249, 37);
             this.SaveAsCSVbutton.TabIndex = 9;
             this.SaveAsCSVbutton.Text = "Save as CSV";
             this.SaveAsCSVbutton.UseVisualStyleBackColor = true;
+            this.SaveAsCSVbutton.Click += new System.EventHandler(this.SaveAsCSVbutton_Click);
             // 
             // textBox1
             // 
@@ -147,15 +150,15 @@ namespace CrystalReports_G5
             this.textBox1.Location = new System.Drawing.Point(72, 348);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(557, 210);
+            this.textBox1.Size = new System.Drawing.Size(687, 210);
             this.textBox1.TabIndex = 10;
             // 
             // searchbutton
             // 
             this.searchbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchbutton.Location = new System.Drawing.Point(635, 348);
+            this.searchbutton.Location = new System.Drawing.Point(801, 348);
             this.searchbutton.Name = "searchbutton";
-            this.searchbutton.Size = new System.Drawing.Size(121, 37);
+            this.searchbutton.Size = new System.Drawing.Size(249, 37);
             this.searchbutton.TabIndex = 11;
             this.searchbutton.Text = "Search";
             this.searchbutton.UseVisualStyleBackColor = true;
@@ -163,9 +166,9 @@ namespace CrystalReports_G5
             // appendbutton
             // 
             this.appendbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.appendbutton.Location = new System.Drawing.Point(779, 348);
+            this.appendbutton.Location = new System.Drawing.Point(801, 391);
             this.appendbutton.Name = "appendbutton";
-            this.appendbutton.Size = new System.Drawing.Size(121, 37);
+            this.appendbutton.Size = new System.Drawing.Size(249, 37);
             this.appendbutton.TabIndex = 13;
             this.appendbutton.Text = "Append";
             this.appendbutton.UseVisualStyleBackColor = true;
@@ -173,7 +176,7 @@ namespace CrystalReports_G5
             // statisticsbutton
             // 
             this.statisticsbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statisticsbutton.Location = new System.Drawing.Point(651, 521);
+            this.statisticsbutton.Location = new System.Drawing.Point(801, 521);
             this.statisticsbutton.Name = "statisticsbutton";
             this.statisticsbutton.Size = new System.Drawing.Size(249, 37);
             this.statisticsbutton.TabIndex = 14;

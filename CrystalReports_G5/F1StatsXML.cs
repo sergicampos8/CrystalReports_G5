@@ -1,30 +1,22 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CrystalReports_G5.Functions;
 
 namespace CrystalReports_G5
 {
     public partial class F1StatsXML : Form
     {
-        static FuncionesAuxiliares funcionesAuxiliares = new FuncionesAuxiliares();
-        static ArrayList ArrayDrivers = new ArrayList();
-        static ArrayList ArrayRTeams = new ArrayList();
-        static ArrayList ArrayGP = new ArrayList();
+        List<string> ListDrivers = new List<string>();
+        List<string> ListRTeams = new List<string>();
+        List<string> ListGP = new List<string>();
+
         public F1StatsXML()
         {
             InitializeComponent();
 
+            List<string> ArrayGP = new List<string>();
 
-   
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -34,15 +26,15 @@ namespace CrystalReports_G5
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
-            ArrayList lines = new ArrayList();
+            List<string> lines = new List<string>();
             string filePath = FileBox.Text.Trim();
-            lines = funcionesAuxiliares.ReadFile(filePath);
-            funcionesAuxiliares.FillArraylists(lines);
+            lines = LoadData.ReadFile(filePath);
+            LoadData.FillDataInLists(lines, ListDrivers, ListRTeams, ListGP);
         }
 
         private void ButtonBrowse_Click(object sender, EventArgs e)
         {
-            string rutaArchivo = funcionesAuxiliares.BrowseFile();
+            string rutaArchivo = LoadData.BrowseFile();
             FileBox.Text = rutaArchivo;
 
         }
@@ -54,7 +46,39 @@ namespace CrystalReports_G5
 
         private void TypeEmployeeMultiBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string seleccion = (string) TypeEmployeeMultiBox.SelectedItem;
+
+            NameMultiBox.Items.Clear();  // Limpia los elementos existentes en el segundo ListBox
+            if(seleccion == "Grand Prix")
+            {
+                NameMultiBox.Items.AddRange(ListGP.ToArray());
+            }
+            else if (seleccion == "Pilot")
+            {
+                NameMultiBox.Items.AddRange(ListDrivers.ToArray());
+            }
+            else
+            {
+                NameMultiBox.Items.AddRange(ListRTeams.ToArray());
+            }
+        }
+
+        private void NameMultiBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void LabelFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SaveAsCSVbutton_Click(object sender, EventArgs e)
+        {
 
         }
     }
+
+
 }
+
+
