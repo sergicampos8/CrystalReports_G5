@@ -30,9 +30,6 @@ namespace CrystalReports_G5
                     DataInDict(data, elementname, drivers, rteams, GPs);
                 }
             }
-            WriteDictionary(drivers);
-            WriteDictionary(rteams);
-            WriteDictionary(GPs);
 
         }
 

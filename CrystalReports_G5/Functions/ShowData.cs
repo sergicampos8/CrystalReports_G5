@@ -8,11 +8,39 @@ namespace CrystalReports_G5
 {
     class ShowData
     {
+        public static string id;
        
-        public static void DriversView()
+        public static void DriversView(string pilot_name)
         {
-            
+            id = DictionaryPoints.GetId(pilot_name);
+
+            Console.WriteLine("-------------------------------------------------");
+            Console.WriteLine("{0}", pilot_name);
+            Console.WriteLine("-------------------------------------------------");
+
+            foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord )
+            {
+                string points_value = points.Value;
+                string points_id = points.Key;
+
+                if (points_id.Contains(id))
+                {
+                    foreach (KeyValuePair<string, string> gp in F1StatsXML.GPs)
+                    {
+                        string gp_id = gp.Key;
+                        string gp_name = gp.Value;
+                        if (points_id.Contains(gp_id))
+                        {
+                            Console.WriteLine("{0} {1}", gp_name.PadRight(25), points_value);
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("-------------------------------------------------");
         }
+
+
+
         public static void RacingTeamView()
         {
             

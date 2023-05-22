@@ -77,6 +77,15 @@ namespace CrystalReports_G5
         {
             ExportCSV.GuardarInformacionCSV(lines);
         }
+
+        private void searchbutton_Click(object sender, EventArgs e)
+        {
+            string selection = (string)NameMultiBox.SelectedItem;
+
+            ShowData.DriversView(selection);
+
+
+        }
     }
 
 
