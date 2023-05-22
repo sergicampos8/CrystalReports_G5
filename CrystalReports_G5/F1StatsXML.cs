@@ -10,13 +10,13 @@ namespace CrystalReports_G5
         List<string> ListDrivers = new List<string>();
         List<string> ListRTeams = new List<string>();
         List<string> ListGP = new List<string>();
+        List<string> lines = new List<string>();
+        Dictionary<string, string> PointsRecord = new Dictionary<string,string>();
+
 
         public F1StatsXML()
         {
             InitializeComponent();
-
-            List<string> ArrayGP = new List<string>();
-
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -26,7 +26,6 @@ namespace CrystalReports_G5
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
-            List<string> lines = new List<string>();
             string filePath = FileBox.Text.Trim();
             lines = LoadData.ReadFile(filePath);
             LoadData.FillDataInLists(lines, ListDrivers, ListRTeams, ListGP);
@@ -65,6 +64,7 @@ namespace CrystalReports_G5
 
         private void NameMultiBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+
         }
 
         private void LabelFile_Click(object sender, EventArgs e)
@@ -74,7 +74,9 @@ namespace CrystalReports_G5
 
         private void SaveAsCSVbutton_Click(object sender, EventArgs e)
         {
+            ExportCSV.GuardarInformacionCSV(lines);
 
+            MessageBox.Show("La información se ha guardado en el archivo CSV.");
         }
     }
 

@@ -131,6 +131,8 @@ namespace CrystalReports_G5
                 {
                     data = GetElementData(linea);
                     DataInList(data, elementname, drivers, rteams, GPs);
+
+            
                 }
             }
         }
@@ -176,5 +178,11 @@ namespace CrystalReports_G5
             }
             return check;
         }
+
+        public static void PointsToDictionary(Dictionary<string,string> Pointsrecord)
+        {
+
+        }
+
     }
 }
