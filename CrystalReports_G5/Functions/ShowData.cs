@@ -10,15 +10,16 @@ namespace CrystalReports_G5
     {
        
         public static void DriversView()
-        {        
+        {
+            
         }
-
         public static void RacingTeamView()
         {
+            
         }
-
         public static void ListView()
         {
+            
         }
     }
 }
