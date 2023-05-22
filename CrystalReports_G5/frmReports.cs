@@ -28,5 +28,12 @@ namespace CrystalReports_G5
         {
             
         }
+
+        private void moreOptionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            F1StatsXML fsxml = new F1StatsXML();
+            fsxml.MdiParent = this;
+            fsxml.Show();
+        }
     }
 }
