@@ -7,12 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CrystalReports_G5.Functions
+namespace CrystalReports_G5
 {
-    class FuncionesAuxiliares
+    class LoadData
     {
-
-        public string BrowseFile()
+        public static string BrowseFile()
         {
             string rutaArchivo = "";
 
@@ -29,9 +28,9 @@ namespace CrystalReports_G5.Functions
             return rutaArchivo;
         }
 
-        public ArrayList ReadFile(string filePath)
+        public static List<string> ReadFile(string filePath)
         {
-            ArrayList ArrayListXML = new ArrayList();
+            List<string> ListXML = new List<string>();
 
             if (File.Exists(filePath))
             {
@@ -42,7 +41,7 @@ namespace CrystalReports_G5.Functions
                         string linea;
                         while ((linea = sr.ReadLine()) != null)
                         {
-                            ArrayListXML.Add(linea);
+                            ListXML.Add(linea);
                         }
                     }
                     // Hacer algo con el contenido del archivo
@@ -57,16 +56,7 @@ namespace CrystalReports_G5.Functions
             {
                 MessageBox.Show("El archivo no existe.", "Archivo no Encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
-
-            // Imprimir las líneas del archivo
-            //Console.WriteLine("Contenido del archivo:");
-            //foreach (string linea in ArrayListXML)
-            //{
-            //    Console.WriteLine(linea);
-            //}
-
-            return ArrayListXML;
+            return ListXML;
         }
 
         public static string GetElementName(string xml)
@@ -116,19 +106,20 @@ namespace CrystalReports_G5.Functions
             }
         }
 
-        public static bool Checkelement (string elementname)
+        public static bool Checkelement(string elementname)
         {
             bool check = false;
-            if(elementname == "GPName" || elementname == "Name" || elementname == "RacingTeam")
-            { 
+            if (elementname == "GPName" || elementname == "Name" || elementname == "RacingTeam")
+            {
                 check = true;
             }
 
             return check;
         }
 
-        public void FillDataInArraylists(ArrayList lines)
+        public static void FillDataInLists(List<string> lines, List<string> drivers, List<string> rteams, List<string> GPs)
         {
+
             string elementname, data;
             bool rightelement;
             foreach (string linea in lines)
@@ -136,70 +127,54 @@ namespace CrystalReports_G5.Functions
                 elementname = GetElementName(linea);
                 rightelement = Checkelement(elementname);
 
-                if(rightelement)
-                
-                    data = GetElementData(linea);
-                    PutDataInArrayList(linea, elementname);
-                    Console.WriteLine(linea);
-
-                }
-            }
-        }
-
-        public void PutDataInArrayList(string word, string type)
-        {
-
-            ArrayList extra = new ArrayList();
-            bool repeticio;
-
-            repeticio = false;
-               
-
-
-            foreach(string line in extra)
-            {
-                if (word.Equals(line))
+                if (rightelement)
                 {
-                    repeticio = true;
-                    Console.WriteLine(line);
+                    data = GetElementData(linea);
+                    DataInList(data, elementname, drivers, rteams, GPs);
                 }
-
             }
+        }
 
-        if (!repeticio)
+        public static void DataInList(string data, string elementname, List<string> drivers, List<string> rteams, List<string> GPs)
         {
-            if (type.Equals("GPName"))
+            if (elementname == "GPName")
             {
-                ArrayGP = extra;
+                if(Distinct(GPs, data))
+                    GPs.Add(data);
             }
-            else if (type.Equals("Name"))
+            else if (elementname == "Name")
             {
-                ArrayDrivers = extra;
+                if (Distinct(drivers, data))
+                    drivers.Add(data);
             }
             else
             {
-                ArrayRTeams = extra;
+                if (Distinct(rteams, data))
+                    rteams.Add(data);
             }
 
         }
 
-        public ArrayList ReturnCorrectList(string type, ArrayList ArrayDrivers, ArrayList ArrayRTeams, ArrayList ArrayGP)
+        public static void WriteList(List<string> list)
         {
-            ArrayList extra = new ArrayList;
-            if (type.Equals("GPName"))
+            foreach (string linea in list)
             {
-                extra = ArrayGP;
+                Console.WriteLine(linea);
             }
-            else if (type.Equals("Name"))
-            {
-                extra = ArrayDrivers;
-            }
-            else
-            {
-                extra = ArrayRTeams;
-            }
-            return extra;
 
-        }             
+        }
+
+        public static bool Distinct(List<string> list, string data)
+        {
+            bool check = true;
+            foreach (string linea in list)
+            {
+                if (data == linea)
+                {
+                    check = false;
+                }
+            }
+            return check;
+        }
     }
 }
