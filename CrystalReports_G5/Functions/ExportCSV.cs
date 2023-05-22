@@ -11,24 +11,19 @@ namespace CrystalReports_G5
     class ExportCSV
     {
         public static void GuardarInformacionCSV(List<string> lines)
-        {
+       {
             string csvFilePath;
             List<string> filteredLines = new List<string>();
-            bool startRecording = false;
 
             foreach (string line in lines)
             {
-                if (line.Contains("<Results>"))
+                if (line.Contains("<GPInfo>"))
                 {
-                    startRecording = true;
-                }
-                else if (line.Contains("</Results>"))
-                {
-                    startRecording = false;
-                }
-                else if (startRecording)
-                {
-                    filteredLines.Add(line);
+                    filteredLines.Add(GetValue(line, "<GPName>"));
+                    filteredLines.Add(GetValue(line, "<Position>"));
+                    filteredLines.Add(GetValue(line, "<Driver>"));
+                    filteredLines.Add(GetValue(line, "<Team>"));
+                    filteredLines.Add(GetValue(line, "<Points>"));
                 }
             }
 
@@ -43,13 +38,7 @@ namespace CrystalReports_G5
             {
                 csvFilePath = saveFileDialog.FileName;
 
-                using (StreamWriter file = new StreamWriter(csvFilePath))
-                {
-                    foreach (string line in filteredLines)
-                    {
-                        file.WriteLine(line);
-                    }
-                }
+                File.WriteAllLines(csvFilePath, filteredLines);
 
                 Console.WriteLine("Archivo CSV creado con éxito.");
             }
@@ -57,15 +46,14 @@ namespace CrystalReports_G5
             {
                 Console.WriteLine("Operación cancelada por el usuario.");
             }
-
-            csvFilePath = "datos.csv";
-            using (StreamWriter file = new StreamWriter(csvFilePath))
-            {
-                foreach (string line in filteredLines)
-                {
-                    file.WriteLine(line);
-                }
-            }
         }
+
+        static string GetValue(string line, string tag)
+        {
+            int startIndex = line.IndexOf(tag) + tag.Length;
+            int endIndex = line.IndexOf("</", startIndex);
+            return line.Substring(startIndex, endIndex - startIndex);
+        }
+
     }
 }
