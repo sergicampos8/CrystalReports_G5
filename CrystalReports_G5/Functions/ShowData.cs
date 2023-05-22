@@ -21,5 +21,9 @@ namespace CrystalReports_G5
         {
             
         }
+        public static void Classic()
+        {
+
+        }
     }
 }
