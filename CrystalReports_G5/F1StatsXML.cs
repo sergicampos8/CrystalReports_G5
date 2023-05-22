@@ -74,8 +74,6 @@ namespace CrystalReports_G5
         private void SaveAsCSVbutton_Click(object sender, EventArgs e)
         {
             ExportCSV.GuardarInformacionCSV(lines);
-
-            MessageBox.Show("La información se ha guardado en el archivo CSV.");
         }
     }
 
