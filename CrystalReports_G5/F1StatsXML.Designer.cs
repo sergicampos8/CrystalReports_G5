@@ -162,6 +162,7 @@ namespace CrystalReports_G5
             this.searchbutton.TabIndex = 11;
             this.searchbutton.Text = "Search";
             this.searchbutton.UseVisualStyleBackColor = true;
+            this.searchbutton.Click += new System.EventHandler(this.searchbutton_Click);
             // 
             // appendbutton
             // 
