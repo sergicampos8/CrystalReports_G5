@@ -11,22 +11,43 @@ namespace CrystalReports_G5
     class ExportCSV
     {
         public static void GuardarInformacionCSV(List<string> lines)
-       {
+        {
             string csvFilePath;
             List<string> filteredLines = new List<string>();
 
+            string gpName, position, name, team, score;
+
+            gpName = ""; position = ""; name = ""; team = ""; score = "";
             foreach (string line in lines)
             {
-                if (line.Contains("<GPInfo>"))
+                if (line.Contains("<GPName>"))
                 {
-                    filteredLines.Add(GetValue(line, "<GPName>"));
-                    filteredLines.Add(GetValue(line, "<Position>"));
-                    filteredLines.Add(GetValue(line, "<Driver>"));
-                    filteredLines.Add(GetValue(line, "<Team>"));
-                    filteredLines.Add(GetValue(line, "<Points>"));
+                    gpName = LoadData.GetElementData(line);
+                }
+                else if (line.Contains("<Standings"))
+                {
+                    position = GetPosition(line);
+                }
+                else if (line.Contains("<Name>"))
+                {
+                    name = LoadData.GetElementData(line);
+                }
+                else if (line.Contains("<RacingTeam>"))
+                {
+                    team = LoadData.GetElementData(line);
+                }
+                else if (line.Contains("<Score>"))
+                {
+                    score = LoadData.GetElementData(line);
+                }
+
+                if (gpName != "" && position != "" && name != "" && team != "" && score != "")
+                {
+                    string csvLine = $"{gpName};{position};{name};{team};{score}";
+                    filteredLines.Add(csvLine);
+                    position = ""; name = ""; team = ""; score = "";
                 }
             }
-
             filteredLines.Insert(0, "GP;Position;Driver;Team;Points");
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -40,20 +61,20 @@ namespace CrystalReports_G5
 
                 File.WriteAllLines(csvFilePath, filteredLines);
 
-                Console.WriteLine("Archivo CSV creado con éxito.");
+                MessageBox.Show("La información se ha guardado en el archivo CSV.");
+
             }
             else
             {
-                Console.WriteLine("Operación cancelada por el usuario.");
+                MessageBox.Show("Ha cancelado la operación");
             }
         }
-
-        static string GetValue(string line, string tag)
+        static string GetPosition(string line)
         {
-            int startIndex = line.IndexOf(tag) + tag.Length;
-            int endIndex = line.IndexOf("</", startIndex);
-            return line.Substring(startIndex, endIndex - startIndex);
+            int startIndex = line.IndexOf(" position=\"") + 11;
+            int endIndex = line.IndexOf('"', startIndex);
+            string position = line.Substring(startIndex, endIndex - startIndex);
+            return position;
         }
-
     }
 }
