@@ -11,7 +11,7 @@ namespace CrystalReports_G5
 {
     class LoadData
     {
-        public static string gp_name, pilot_name, rteam,score, id;
+        public static string gp_name, pilot_name, score, rteam_name,id;
 
 
         public static void FillDataInDict(List<string> lines, Dictionary<string,string> drivers, Dictionary<string, string> rteams, Dictionary<string, string> GPs)
@@ -159,21 +159,23 @@ namespace CrystalReports_G5
                 id = DictionaryPoints.GetId(data);
                 if (Distinct(drivers, data))
                     drivers.Add(id,data);
-                PointsToDictionary(F1StatsXML.PointsRecord, gp_name, pilot_name, score);
+                
             }
             else
             {
+                rteam_name = data;
                 id = DictionaryPoints.GetId(data);
                 if (Distinct(rteams, data))
                     rteams.Add(id, data);
+                PointsToDictionary(F1StatsXML.PointsRecord, gp_name, pilot_name, score, rteam_name);
             }
         }
 
-        public static void PointsToDictionary(Dictionary<string, string> Pointsrecord, string gp_name, string pilot_name, string score)
+        public static void PointsToDictionary(Dictionary<string, string> Pointsrecord, string gp_name, string pilot_name, string score, string rteam_name)
         {
             string id;
             //ID con formato GPNombre_NomApeApe
-            id = DictionaryPoints.GetPointsId(gp_name, pilot_name);
+            id = DictionaryPoints.GetPointsId(gp_name, pilot_name, rteam_name);
             Pointsrecord.Add(id, score);
         }
 

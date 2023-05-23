@@ -16,9 +16,9 @@ namespace CrystalReports_G5
         {
             id = DictionaryPoints.GetId(pilot_name);
 
-            query.Add("-------------------------------------------------");
+            query.Add("--------------------------------------------------------------------------------------------------");
             query.Add(pilot_name);
-            query.Add("-------------------------------------------------");
+            query.Add("--------------------------------------------------------------------------------------------------");
 
             foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord )
             {
@@ -38,31 +38,106 @@ namespace CrystalReports_G5
                     }
                 }
             }
-            query.Add("-------------------------------------------------");
+            query.Add("--------------------------------------------------------------------------------------------------");
+            return query;
+        }
+
+
+
+        public static List<string> RacingTeamView(string rt_name)
+        {
+            id = DictionaryPoints.GetId(rt_name);
+            List<string> RTDrivers = new List<string>();
+
+
+            int total_points_1 = 0,
+                total_points_2 = 0;
+            query.Add("--------------------------------------------------------------------------------------------------");
+            query.Add(rt_name);
+            query.Add("--------------------------------------------------------------------------------------------------");
+
+
+            foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord)
+            {
+
+                string points_value = points.Value;
+                string points_id = points.Key;
+                
+                if (points_id.Contains(id))
+                {
+                    foreach (KeyValuePair<string, string> driver in F1StatsXML.Drivers)
+                    {
+                        string driver_id = driver.Key;
+                        string driver_name = driver.Value;
+                        if (points_id.Contains(driver_id))
+                        {
+                            if (RTDrivers.Count < 2)
+                            {
+                                RTDrivers.Add(driver_name);
+                            }
+                            if (RTDrivers[0] == driver_name)
+                            {
+                                total_points_1 += int.Parse(points_value);
+                            }
+                            else
+                            {
+                                total_points_2 += int.Parse(points_value);
+                            }
+                        }
+                    }
+                }
+            }
+            query.Add(RTDrivers[0].PadRight(20) + Convert.ToString(total_points_1));
+            query.Add(RTDrivers[1].PadRight(20) + Convert.ToString(total_points_2));
+            query.Add("--------------------------------------------------------------------------------------------------");
+            return query;
+        }
+
+
+
+        public static List<string> GPView(string GP_name)
+        {
+            int position = 0;
+            id = DictionaryPoints.GetGpId(GP_name);
+
+            query.Add("--------------------------------------------------------------------------------------------------");
+            query.Add(GP_name);
+            query.Add("--------------------------------------------------------------------------------------------------");
+
+            foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord)
+            {
+                string points_value = points.Value;
+                string points_id = points.Key;
+
+                if (points_id.Contains(id))
+                {
+                    foreach (KeyValuePair<string, string> driver in F1StatsXML.Drivers)
+                    {
+                        string driver_id = driver.Key;
+                        string driver_name = driver.Value;
+                        if (points_id.Contains(driver_id))
+                        {
+                            position++;
+                            query.Add(Convert.ToString(position).PadRight(10) + points_value.PadRight(15) + driver_name );
+                        }
+                    }
+                }
+            }
+            query.Add("--------------------------------------------------------------------------------------------------");
             return query;
         }
 
         public static void Add2Append(List<string> searchList, List<string> append)
         {
-
             foreach (string line in searchList)
             {
                 append.Add(line);
             }
         }
 
-        public static void RacingTeamView()
-        {
-            
-        }
-        public static void ListView()
-        {
-            
-        }
-        public static void Classic()
-        {
-
-        }
+        //public static Liststring> ViewStatistics()
+        //{
+        //}
 
     }
 }

@@ -86,7 +86,7 @@ namespace CrystalReports_G5
         {
             string selection = (string)NameMultiBox.SelectedItem;
 
-            searchList = ShowData.DriversView(selection);
+            searchList = ShowData.RacingTeamView(selection);
             QueryTextBox.Text = "";
             QueryTextBox.Text = string.Join(Environment.NewLine, searchList);
             ShowData.Add2Append(searchList, append);
