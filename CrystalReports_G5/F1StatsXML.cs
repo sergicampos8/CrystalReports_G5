@@ -106,7 +106,11 @@ namespace CrystalReports_G5
             string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
             string selection2 = (string)NameMultiBox.SelectedItem;
             searchList = ShowData.SelectView(selection1, selection2);
-            QueryTextBox.Text = string.Join(Environment.NewLine, searchList);
+            foreach(string line in searchList)
+            {
+                QueryTextBox.Text += line;
+            }
+            //QueryTextBox.Text = string.Join(Environment.NewLine, searchList);
         }
     }
 }
