@@ -14,8 +14,8 @@ namespace CrystalReports_G5
         public static Dictionary<string, string> Drivers = new Dictionary<string, string>();
         public static Dictionary<string, string> RTeams = new Dictionary<string, string>();
         public static Dictionary<string, string> GPs = new Dictionary<string, string>();
-
-
+        bool loaded = false;
+         
         public F1StatsXML()
         {
             InitializeComponent();
@@ -28,9 +28,16 @@ namespace CrystalReports_G5
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
+            PointsRecord.Clear();
+            Drivers.Clear();
+            RTeams.Clear();
+            GPs.Clear();
+
             string filePath = FileBox.Text.Trim();
             lines = LoadData.ReadFile(filePath);
             LoadData.FillDataInDict(lines, Drivers, RTeams, GPs);
+            if (lines.Count > 0)
+                loaded = true;
         }
 
         private void ButtonBrowse_Click(object sender, EventArgs e)
@@ -77,18 +84,28 @@ namespace CrystalReports_G5
 
         private void SaveAsCSVbutton_Click(object sender, EventArgs e)
         {
-            ExportCSV.GuardarInformacionCSV(lines);
+            if (loaded)
+            {
+                ExportCSV.GuardarInformacionCSV(lines);
+            }
         }
 
         private void searchbutton_Click(object sender, EventArgs e)
         {
-            string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
-            string selection2 = (string)NameMultiBox.SelectedItem;
-            searchList.Clear();
-            searchList = ShowData.SelectView(selection1, selection2);
+            if (loaded)
+            {
+                string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
+                string selection2 = (string)NameMultiBox.SelectedItem;
+                searchList.Clear();
+                searchList = ShowData.SelectView(selection1, selection2);
 
-            QueryTextBox.Text = "";
-            QueryTextBox.Text = string.Join(Environment.NewLine, searchList);
+                QueryTextBox.Text = "";
+                foreach (string line in searchList)
+                {
+                    QueryTextBox.Text += line;
+                }
+            }
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -103,10 +120,17 @@ namespace CrystalReports_G5
 
         private void appendbutton_Click(object sender, EventArgs e)
         {
-            string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
-            string selection2 = (string)NameMultiBox.SelectedItem;
-            searchList = ShowData.SelectView(selection1, selection2);
-            QueryTextBox.Text = string.Join(Environment.NewLine, searchList);
+            if (loaded)
+            {
+                string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
+                string selection2 = (string)NameMultiBox.SelectedItem;
+                searchList = ShowData.SelectView(selection1, selection2);
+                foreach (string line in searchList)
+                {
+                    QueryTextBox.Text += line;
+                }
+            }
+
         }
     }
 }

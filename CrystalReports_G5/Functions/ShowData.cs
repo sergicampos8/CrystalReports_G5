@@ -94,12 +94,14 @@ namespace CrystalReports_G5
             return query;
         }
 
+
         public static int GetRtPoints(string id)
         {
             int points_p1 = 0,
                 points_p2 = 0,
                 total_points;
             List<string> RTDrivers = new List<string>();
+
 
             foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord)
             {
@@ -197,18 +199,19 @@ namespace CrystalReports_G5
 
 
 
+
         public static List<string> ViewStatistics()
         {
             List<string> Stats = new List<string>();
             return Stats;
         }
 
+
         public static List<string> SelectView(string selection1, string selection2)
         {
             List<string> QList = new List<string>();
 
-            if (selection1 == "Grand Prix")
-            {
+            if (selection1 == "Grand Prix")            {
                 QList = ShowData.GPView(selection2);
             }
             else if (selection1 == "Pilot")
