@@ -2,16 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace CrystalReports_G5
 {
     public partial class F1StatsXML : Form
     {
-        List<string> ListDrivers = new List<string>();
-        List<string> ListRTeams = new List<string>();
-        List<string> ListGP = new List<string>();
+
+        List<string> searchList = new List<string>();
         List<string> lines = new List<string>();
-        public static Dictionary<string, string> PointsRecord = new Dictionary<string,string>();
+        public static Dictionary<string, string> PointsRecord = new Dictionary<string, string>();
+        public static Dictionary<string, string> Drivers = new Dictionary<string, string>();
+        public static Dictionary<string, string> RTeams = new Dictionary<string, string>();
+        public static Dictionary<string, string> GPs = new Dictionary<string, string>();
 
 
         public F1StatsXML()
@@ -28,7 +31,7 @@ namespace CrystalReports_G5
         {
             string filePath = FileBox.Text.Trim();
             lines = LoadData.ReadFile(filePath);
-            LoadData.FillDataInLists(lines, ListDrivers, ListRTeams, ListGP);
+            LoadData.FillDataInDict(lines, Drivers, RTeams, GPs);
         }
 
         private void ButtonBrowse_Click(object sender, EventArgs e)
@@ -50,15 +53,15 @@ namespace CrystalReports_G5
             NameMultiBox.Items.Clear();  // Limpia los elementos existentes en el segundo ListBox
             if(seleccion == "Grand Prix")
             {
-                NameMultiBox.Items.AddRange(ListGP.ToArray());
+                NameMultiBox.Items.AddRange(GPs.Values.ToArray());
             }
             else if (seleccion == "Pilot")
             {
-                NameMultiBox.Items.AddRange(ListDrivers.ToArray());
+                NameMultiBox.Items.AddRange(Drivers.Values.ToArray());
             }
             else
             {
-                NameMultiBox.Items.AddRange(ListRTeams.ToArray());
+                NameMultiBox.Items.AddRange(RTeams.Values.ToArray());
             }
         }
 
@@ -74,6 +77,25 @@ namespace CrystalReports_G5
         private void SaveAsCSVbutton_Click(object sender, EventArgs e)
         {
             ExportCSV.GuardarInformacionCSV(lines);
+        }
+
+        private void searchbutton_Click(object sender, EventArgs e)
+        {
+            string selection = (string)NameMultiBox.SelectedItem;
+
+            searchList = ShowData.DriversView(selection);
+
+            QueryTextBox.Text = string.Join(Environment.NewLine, searchList); ;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void F1StatsXML_Load(object sender, EventArgs e)
+        {
+
         }
     }
 

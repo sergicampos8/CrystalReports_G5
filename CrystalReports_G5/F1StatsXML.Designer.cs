@@ -38,7 +38,7 @@ namespace CrystalReports_G5
             this.TypeEmployeeMultiBox = new System.Windows.Forms.ComboBox();
             this.NameMultiBox = new System.Windows.Forms.ComboBox();
             this.SaveAsCSVbutton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.QueryTextBox = new System.Windows.Forms.TextBox();
             this.searchbutton = new System.Windows.Forms.Button();
             this.appendbutton = new System.Windows.Forms.Button();
             this.statisticsbutton = new System.Windows.Forms.Button();
@@ -130,6 +130,7 @@ namespace CrystalReports_G5
             this.NameMultiBox.Location = new System.Drawing.Point(559, 301);
             this.NameMultiBox.Name = "NameMultiBox";
             this.NameMultiBox.Size = new System.Drawing.Size(200, 24);
+            this.NameMultiBox.Sorted = true;
             this.NameMultiBox.TabIndex = 8;
             this.NameMultiBox.SelectedIndexChanged += new System.EventHandler(this.NameMultiBox_SelectedIndexChanged);
             // 
@@ -144,14 +145,15 @@ namespace CrystalReports_G5
             this.SaveAsCSVbutton.UseVisualStyleBackColor = true;
             this.SaveAsCSVbutton.Click += new System.EventHandler(this.SaveAsCSVbutton_Click);
             // 
-            // textBox1
+            // QueryTextBox
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(72, 348);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(687, 210);
-            this.textBox1.TabIndex = 10;
+            this.QueryTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.QueryTextBox.Location = new System.Drawing.Point(72, 348);
+            this.QueryTextBox.Multiline = true;
+            this.QueryTextBox.Name = "QueryTextBox";
+            this.QueryTextBox.Size = new System.Drawing.Size(687, 210);
+            this.QueryTextBox.TabIndex = 10;
+            this.QueryTextBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // searchbutton
             // 
@@ -162,6 +164,7 @@ namespace CrystalReports_G5
             this.searchbutton.TabIndex = 11;
             this.searchbutton.Text = "Search";
             this.searchbutton.UseVisualStyleBackColor = true;
+            this.searchbutton.Click += new System.EventHandler(this.searchbutton_Click);
             // 
             // appendbutton
             // 
@@ -187,11 +190,13 @@ namespace CrystalReports_G5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1124, 597);
             this.Controls.Add(this.statisticsbutton);
             this.Controls.Add(this.appendbutton);
             this.Controls.Add(this.searchbutton);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.QueryTextBox);
             this.Controls.Add(this.SaveAsCSVbutton);
             this.Controls.Add(this.NameMultiBox);
             this.Controls.Add(this.TypeEmployeeMultiBox);
@@ -203,6 +208,7 @@ namespace CrystalReports_G5
             this.Controls.Add(this.pictureBox1);
             this.Name = "F1StatsXML";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.F1StatsXML_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -220,7 +226,7 @@ namespace CrystalReports_G5
         private System.Windows.Forms.ComboBox TypeEmployeeMultiBox;
         private System.Windows.Forms.ComboBox NameMultiBox;
         private System.Windows.Forms.Button SaveAsCSVbutton;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox QueryTextBox;
         private System.Windows.Forms.Button searchbutton;
         private System.Windows.Forms.Button appendbutton;
         private System.Windows.Forms.Button statisticsbutton;

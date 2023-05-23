@@ -4,7 +4,7 @@ namespace CrystalReports_G5
 {
     class DictionaryPoints
     {
-        private static string GetGpId(string gp)
+        public static string GetGpId(string gp)
         {
             string result = "";
             foreach (char c in gp)
@@ -17,7 +17,7 @@ namespace CrystalReports_G5
             return result;
         }
 
-        public static string GetPilotId(string pilot)
+        public static string GetId(string pilot)
         {
             string[] words = pilot.Split(' '); // Separar las palabras por espacio
             string result = "";
@@ -54,7 +54,7 @@ namespace CrystalReports_G5
 
         public static string GetPointsId(string gp_name, string pilot_name)
         {
-            string id = GetGpId(gp_name) + "_" + GetPilotId(pilot_name);
+            string id = GetGpId(gp_name) + "_" + GetId(pilot_name);
             return id;
         }
     }

@@ -11,10 +11,10 @@ namespace CrystalReports_G5
 {
     class LoadData
     {
-        public static string gp_name, pilot_name, score; 
+        public static string gp_name, pilot_name, rteam,score, id;
 
 
-        public static void FillDataInLists(List<string> lines, List<string> drivers, List<string> rteams, List<string> GPs)
+        public static void FillDataInDict(List<string> lines, Dictionary<string,string> drivers, Dictionary<string, string> rteams, Dictionary<string, string> GPs)
         {
 
             string elementname, data;
@@ -27,9 +27,10 @@ namespace CrystalReports_G5
                 if (rightelement)
                 {
                     data = GetElementData(linea);
-                    DataInList(data, elementname, drivers, rteams, GPs);
+                    DataInDict(data, elementname, drivers, rteams, GPs);
                 }
             }
+
         }
 
         public static string BrowseFile()
@@ -138,13 +139,14 @@ namespace CrystalReports_G5
             return check;
         }
 
-        public static void DataInList(string data, string elementname, List<string> drivers, List<string> rteams, List<string> GPs)
+        public static void DataInDict(string data, string elementname, Dictionary<string, string> drivers, Dictionary<string, string> rteams, Dictionary<string, string> GPs)
         {
             if (elementname == "GPName")
             {
                 gp_name = data;
-                if(Distinct(GPs, data))
-                    GPs.Add(data);
+                id = DictionaryPoints.GetGpId(data);
+                if (Distinct(GPs, data))
+                    GPs.Add(id, data);
             }
             else if (elementname == "Score")
             {
@@ -154,14 +156,16 @@ namespace CrystalReports_G5
             else if (elementname == "Name")
             {
                 pilot_name = data;
+                id = DictionaryPoints.GetId(data);
                 if (Distinct(drivers, data))
-                    drivers.Add(data);
+                    drivers.Add(id,data);
                 PointsToDictionary(F1StatsXML.PointsRecord, gp_name, pilot_name, score);
             }
             else
             {
+                id = DictionaryPoints.GetId(data);
                 if (Distinct(rteams, data))
-                    rteams.Add(data);
+                    rteams.Add(id, data);
             }
         }
 
@@ -192,20 +196,17 @@ namespace CrystalReports_G5
         }
 
 
-        public static bool Distinct(List<string> list, string data)
+        public static bool Distinct(Dictionary<string, string> list, string data)
         {
             bool check = true;
-            foreach (string linea in list)
+            foreach (string value in list.Values)
             {
-                if (data == linea)
+                if (data == value)
                 {
                     check = false;
                 }
             }
             return check;
         }
-
-
-
     }
 }
