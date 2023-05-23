@@ -130,11 +130,11 @@ namespace CrystalReports_G5
 
 
 
-        public static List<string> ViewStatistics()
-        {
+        //public static List<string> ViewStatistics()
+        //{
 
                 
-        }
+        //}
 
         public static List<string> SelectView(string selection1, string selection2)
         {
