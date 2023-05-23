@@ -52,9 +52,9 @@ namespace CrystalReports_G5
             return result;
         }
 
-        public static string GetPointsId(string gp_name, string pilot_name)
+        public static string GetPointsId(string gp_name, string pilot_name, string rteam_name)
         {
-            string id = GetGpId(gp_name) + "_" + GetId(pilot_name);
+            string id = GetGpId(gp_name) + "_" + GetId(rteam_name) + "_" + GetId(pilot_name);
             return id;
         }
     }
