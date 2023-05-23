@@ -8,7 +8,8 @@ namespace CrystalReports_G5
 {
     public partial class F1StatsXML : Form
     {
-   
+
+        List<string> searchList = new List<string>();
         List<string> lines = new List<string>();
         public static Dictionary<string, string> PointsRecord = new Dictionary<string, string>();
         public static Dictionary<string, string> Drivers = new Dictionary<string, string>();
@@ -82,8 +83,18 @@ namespace CrystalReports_G5
         {
             string selection = (string)NameMultiBox.SelectedItem;
 
-            ShowData.DriversView(selection);
+            searchList = ShowData.DriversView(selection);
 
+            QueryTextBox.Text = string.Join(Environment.NewLine, searchList); ;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void F1StatsXML_Load(object sender, EventArgs e)
+        {
 
         }
     }

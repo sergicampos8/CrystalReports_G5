@@ -11,7 +11,7 @@ namespace CrystalReports_G5
 {
     class LoadData
     {
-        public static string gp_name, pilot_name, score, id;
+        public static string gp_name, pilot_name, rteam,score, id;
 
 
         public static void FillDataInDict(List<string> lines, Dictionary<string,string> drivers, Dictionary<string, string> rteams, Dictionary<string, string> GPs)
