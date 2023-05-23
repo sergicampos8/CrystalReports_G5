@@ -93,6 +93,7 @@ namespace CrystalReports_G5
             return query;
         }
 
+        
 
 
         public static List<string> GPView(string GP_name)
