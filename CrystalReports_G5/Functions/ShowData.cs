@@ -20,7 +20,7 @@ namespace CrystalReports_G5
             query.Add(pilot_name);
             query.Add("--------------------------------------------------------------------------------------------------");
 
-            foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord )
+            foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord)
             {
                 string points_value = points.Value;
                 string points_id = points.Key;
@@ -62,7 +62,7 @@ namespace CrystalReports_G5
 
                 string points_value = points.Value;
                 string points_id = points.Key;
-                
+
                 if (points_id.Contains(id))
                 {
                     foreach (KeyValuePair<string, string> driver in F1StatsXML.Drivers)
@@ -118,7 +118,7 @@ namespace CrystalReports_G5
                         if (points_id.Contains(driver_id))
                         {
                             position++;
-                            query.Add(Convert.ToString(position).PadRight(10) + points_value.PadRight(15) + driver_name );
+                            query.Add(Convert.ToString(position).PadRight(10) + points_value.PadRight(15) + driver_name);
                         }
                     }
                 }
@@ -127,17 +127,32 @@ namespace CrystalReports_G5
             return query;
         }
 
-        public static void Add2Append(List<string> searchList, List<string> append)
+
+
+        public static List<string> ViewStatistics()
         {
-            foreach (string line in searchList)
-            {
-                append.Add(line);
-            }
+
+                
         }
 
-        //public static Liststring> ViewStatistics()
-        //{
-        //}
+        public static List<string> SelectView(string selection1, string selection2)
+        {
+            List<string> QList = new List<string>();
 
+            if (selection1 == "Grand Prix")
+            {
+                QList = ShowData.GPView(selection2);
+            }
+            else if (selection1 == "Pilot")
+            {
+                QList = ShowData.DriversView(selection2);
+            }
+            else
+            {
+                QList = ShowData.RacingTeamView(selection2);
+            }
+
+            return QList;
+        }
     }
 }

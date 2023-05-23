@@ -8,8 +8,6 @@ namespace CrystalReports_G5
 {
     public partial class F1StatsXML : Form
     {
-        List<string> listaCombinada = new List<string>();
-        List<string> append = new List<string>();
         List<string> searchList = new List<string>();
         List<string> lines = new List<string>();
         public static Dictionary<string, string> PointsRecord = new Dictionary<string, string>();
@@ -84,13 +82,13 @@ namespace CrystalReports_G5
 
         private void searchbutton_Click(object sender, EventArgs e)
         {
-            string selection = (string)NameMultiBox.SelectedItem;
+            string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
+            string selection2 = (string)NameMultiBox.SelectedItem;
+            searchList.Clear();
+            searchList = ShowData.SelectView(selection1, selection2);
 
-            searchList = ShowData.RacingTeamView(selection);
             QueryTextBox.Text = "";
             QueryTextBox.Text = string.Join(Environment.NewLine, searchList);
-            ShowData.Add2Append(searchList, append);
-            searchList.Clear();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -105,16 +103,10 @@ namespace CrystalReports_G5
 
         private void appendbutton_Click(object sender, EventArgs e)
         {
-            string selection = (string)NameMultiBox.SelectedItem;
-            List<string> tempSearchList = ShowData.DriversView(selection); // Obtener la nueva lista de búsqueda
-
-            if (append.Any())
-            {
-                listaCombinada.AddRange(append); // Agregar los elementos de append a listaCombinada
-            }
-            listaCombinada.AddRange(tempSearchList); // Agregar los elementos de tempSearchList a listaCombinada
-            append = tempSearchList; // Actualizar append con los elementos de tempSearchList
-            QueryTextBox.Text = string.Join(Environment.NewLine, listaCombinada);
+            string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
+            string selection2 = (string)NameMultiBox.SelectedItem;
+            searchList = ShowData.SelectView(selection1, selection2);
+            QueryTextBox.Text = string.Join(Environment.NewLine, searchList);
         }
     }
 }
