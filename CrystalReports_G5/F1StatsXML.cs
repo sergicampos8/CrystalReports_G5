@@ -86,7 +86,8 @@ namespace CrystalReports_G5
         {
             string selection = (string)NameMultiBox.SelectedItem;
 
-            searchList = ShowData.RacingTeamView(selection);
+            searchList = ShowData.SelectView(selection);
+
             QueryTextBox.Text = "";
             QueryTextBox.Text = string.Join(Environment.NewLine, searchList);
             ShowData.Add2Append(searchList, append);
@@ -106,14 +107,16 @@ namespace CrystalReports_G5
         private void appendbutton_Click(object sender, EventArgs e)
         {
             string selection = (string)NameMultiBox.SelectedItem;
-            List<string> tempSearchList = ShowData.DriversView(selection); // Obtener la nueva lista de búsqueda
+            List<string> tempSearchList = ShowData.SelectView(selection); // Obtener la nueva lista de búsqueda
 
             if (append.Any())
             {
                 listaCombinada.AddRange(append); // Agregar los elementos de append a listaCombinada
             }
             listaCombinada.AddRange(tempSearchList); // Agregar los elementos de tempSearchList a listaCombinada
-            append = tempSearchList; // Actualizar append con los elementos de tempSearchList
+            append.Clear();
+            ShowData.Add2Append(tempSearchList, append);
+            // Actualizar append con los elementos de tempSearchList
             QueryTextBox.Text = string.Join(Environment.NewLine, listaCombinada);
         }
     }

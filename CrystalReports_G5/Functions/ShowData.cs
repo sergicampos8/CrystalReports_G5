@@ -20,7 +20,7 @@ namespace CrystalReports_G5
             query.Add(pilot_name);
             query.Add("--------------------------------------------------------------------------------------------------");
 
-            foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord )
+            foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord)
             {
                 string points_value = points.Value;
                 string points_id = points.Key;
@@ -62,7 +62,7 @@ namespace CrystalReports_G5
 
                 string points_value = points.Value;
                 string points_id = points.Key;
-                
+
                 if (points_id.Contains(id))
                 {
                     foreach (KeyValuePair<string, string> driver in F1StatsXML.Drivers)
@@ -118,7 +118,7 @@ namespace CrystalReports_G5
                         if (points_id.Contains(driver_id))
                         {
                             position++;
-                            query.Add(Convert.ToString(position).PadRight(10) + points_value.PadRight(15) + driver_name );
+                            query.Add(Convert.ToString(position).PadRight(10) + points_value.PadRight(15) + driver_name);
                         }
                     }
                 }
@@ -139,5 +139,24 @@ namespace CrystalReports_G5
         //{
         //}
 
+        public static List<string> SelectView(string selection)
+        {
+            List<string> QList = new List<string>();
+
+            if (selection == "Grand Prix")
+            {
+                QList = ShowData.GPView(selection);
+            }
+            else if (selection == "Pilot")
+            {
+                QList = ShowData.DriversView(selection);
+            }
+            else
+            {
+                QList = ShowData.RacingTeamView(selection);
+            }
+
+            return QList;
+        }
     }
 }
