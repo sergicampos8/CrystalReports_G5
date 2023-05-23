@@ -83,7 +83,7 @@ namespace CrystalReports_G5
         {
             string selection = (string)NameMultiBox.SelectedItem;
 
-            searchList = ShowData.DriversView(selection);
+            searchList = ShowData.GPView(selection);
 
             QueryTextBox.Text = string.Join(Environment.NewLine, searchList); ;
         }

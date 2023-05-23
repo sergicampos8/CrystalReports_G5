@@ -48,13 +48,43 @@ namespace CrystalReports_G5
         {
             
         }
-        public static void ListView()
+
+        public static List<string> GPView(string GP_name)
         {
-            
-        }
-        public static void Classic()
-        {
+            int position = 0;
+            id = DictionaryPoints.GetGpId(GP_name);
+
+            query.Add("-------------------------------------------------");
+            query.Add(GP_name);
+            query.Add("-------------------------------------------------");
+
+            foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord)
+            {
+                string points_value = points.Value;
+                string points_id = points.Key;
+
+                if (points_id.Contains(id))
+                {
+                    foreach (KeyValuePair<string, string> driver in F1StatsXML.Drivers)
+                    {
+                        string driver_id = driver.Key;
+                        string driver_name = driver.Value;
+                        if (points_id.Contains(driver_id))
+                        {
+                            position++;
+                            query.Add(Convert.ToString(position).PadRight(10) + points_value.PadRight(15) + driver_name );
+                        }
+                    }
+                }
+            }
+            query.Add("-------------------------------------------------");
+            return query;
 
         }
+
+        //public static Liststring> ViewStatistics()
+        //{
+        //}
+
     }
 }
