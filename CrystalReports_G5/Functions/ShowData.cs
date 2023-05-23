@@ -9,14 +9,16 @@ namespace CrystalReports_G5
     class ShowData
     {
         public static string id;
-       
-        public static void DriversView(string pilot_name)
+        public static List<string> query = new List<string>();
+
+
+        public static List<string> DriversView(string pilot_name)
         {
             id = DictionaryPoints.GetId(pilot_name);
 
-            Console.WriteLine("-------------------------------------------------");
-            Console.WriteLine("{0}", pilot_name);
-            Console.WriteLine("-------------------------------------------------");
+            query.Add("-------------------------------------------------");
+            query.Add(pilot_name);
+            query.Add("-------------------------------------------------");
 
             foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord )
             {
@@ -31,12 +33,13 @@ namespace CrystalReports_G5
                         string gp_name = gp.Value;
                         if (points_id.Contains(gp_id))
                         {
-                            Console.WriteLine("{0} {1}", gp_name.PadRight(25), points_value);
+                            query.Add(gp_name.PadRight(25) + points_value);
                         }
                     }
                 }
             }
-            Console.WriteLine("-------------------------------------------------");
+            query.Add("-------------------------------------------------");
+            return query;
         }
 
 
