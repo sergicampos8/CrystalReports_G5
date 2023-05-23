@@ -148,10 +148,11 @@ namespace CrystalReports_G5
             // QueryTextBox
             // 
             this.QueryTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.QueryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QueryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.QueryTextBox.Location = new System.Drawing.Point(72, 399);
             this.QueryTextBox.Multiline = true;
             this.QueryTextBox.Name = "QueryTextBox";
+            this.QueryTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.QueryTextBox.Size = new System.Drawing.Size(837, 317);
             this.QueryTextBox.TabIndex = 10;
             this.QueryTextBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);

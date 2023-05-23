@@ -127,33 +127,29 @@ namespace CrystalReports_G5
             return query;
         }
 
-        public static void Add2Append(List<string> searchList, List<string> append)
+
+
+        public static List<string> ViewStatistics()
         {
-            foreach (string line in searchList)
-            {
-                append.Add(line);
-            }
+
+                
         }
 
-        //public static Liststring> ViewStatistics()
-        //{
-        //}
-
-        public static List<string> SelectView(string selection)
+        public static List<string> SelectView(string selection1, string selection2)
         {
             List<string> QList = new List<string>();
 
-            if (selection == "Grand Prix")
+            if (selection1 == "Grand Prix")
             {
-                QList = ShowData.GPView(selection);
+                QList = ShowData.GPView(selection2);
             }
-            else if (selection == "Pilot")
+            else if (selection1 == "Pilot")
             {
-                QList = ShowData.DriversView(selection);
+                QList = ShowData.DriversView(selection2);
             }
             else
             {
-                QList = ShowData.RacingTeamView(selection);
+                QList = ShowData.RacingTeamView(selection2);
             }
 
             return QList;

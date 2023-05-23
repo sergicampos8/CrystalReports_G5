@@ -39,14 +39,8 @@ namespace CrystalReports_G5
                     p_id = words[i].Substring(0, 1); // Tomar el primer caracter
                 }
 
-                //firstCharacters = char.ToUpper(firstCharacters[0]) + firstCharacters.Substring(1); // Convertir el primer carácter a mayúscula
-
                 result += p_id;
 
-                //if (i < words.Length - 1)
-                //{
-                //    result += ""; // Agregar espacio como separador, excepto para la última palabra
-                //}
             }
 
             return result;
