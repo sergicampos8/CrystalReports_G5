@@ -49,11 +49,13 @@ namespace CrystalReports_G5
             id = DictionaryPoints.GetId(rt_name);
             List<string> RTDrivers = new List<string>();
 
+
             int total_points_1 = 0,
                 total_points_2 = 0;
             query.Add("--------------------------------------------------------------------------------------------------");
             query.Add(rt_name);
             query.Add("--------------------------------------------------------------------------------------------------");
+
 
             foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord)
             {
@@ -91,6 +93,8 @@ namespace CrystalReports_G5
             return query;
         }
 
+
+
         public static List<string> GPView(string GP_name)
         {
             int position = 0;
@@ -121,7 +125,14 @@ namespace CrystalReports_G5
             }
             query.Add("--------------------------------------------------------------------------------------------------");
             return query;
+        }
 
+        public static void Add2Append(List<string> searchList, List<string> append)
+        {
+            foreach (string line in searchList)
+            {
+                append.Add(line);
+            }
         }
 
         //public static Liststring> ViewStatistics()
