@@ -8,7 +8,8 @@ namespace CrystalReports_G5
 {
     public partial class F1StatsXML : Form
     {
-
+        List<string> listaCombinada = new List<string>();
+        List<string> append = new List<string>();
         List<string> searchList = new List<string>();
         List<string> lines = new List<string>();
         public static Dictionary<string, string> PointsRecord = new Dictionary<string, string>();
@@ -48,9 +49,11 @@ namespace CrystalReports_G5
 
         private void TypeEmployeeMultiBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string seleccion = (string) TypeEmployeeMultiBox.SelectedItem;
+            NameMultiBox.SelectedIndex = -1;
 
+            string seleccion = (string) TypeEmployeeMultiBox.SelectedItem;
             NameMultiBox.Items.Clear();  // Limpia los elementos existentes en el segundo ListBox
+
             if(seleccion == "Grand Prix")
             {
                 NameMultiBox.Items.AddRange(GPs.Values.ToArray());
@@ -84,8 +87,10 @@ namespace CrystalReports_G5
             string selection = (string)NameMultiBox.SelectedItem;
 
             searchList = ShowData.DriversView(selection);
-
-            QueryTextBox.Text = string.Join(Environment.NewLine, searchList); ;
+            QueryTextBox.Text = "";
+            QueryTextBox.Text = string.Join(Environment.NewLine, searchList);
+            ShowData.Add2Append(searchList, append);
+            searchList.Clear();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -97,9 +102,21 @@ namespace CrystalReports_G5
         {
 
         }
+
+        private void appendbutton_Click(object sender, EventArgs e)
+        {
+            string selection = (string)NameMultiBox.SelectedItem;
+            List<string> tempSearchList = ShowData.DriversView(selection); // Obtener la nueva lista de búsqueda
+
+            if (append.Any())
+            {
+                listaCombinada.AddRange(append); // Agregar los elementos de append a listaCombinada
+            }
+            listaCombinada.AddRange(tempSearchList); // Agregar los elementos de tempSearchList a listaCombinada
+            append = tempSearchList; // Actualizar append con los elementos de tempSearchList
+            QueryTextBox.Text = string.Join(Environment.NewLine, listaCombinada);
+        }
     }
-
-
 }
 
 

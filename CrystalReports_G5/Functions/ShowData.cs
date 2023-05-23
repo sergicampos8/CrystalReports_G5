@@ -42,7 +42,14 @@ namespace CrystalReports_G5
             return query;
         }
 
+        public static void Add2Append(List<string> searchList, List<string> append)
+        {
 
+            foreach (string line in searchList)
+            {
+                append.Add(line);
+            }
+        }
 
         public static void RacingTeamView()
         {
@@ -56,5 +63,6 @@ namespace CrystalReports_G5
         {
 
         }
+
     }
 }
