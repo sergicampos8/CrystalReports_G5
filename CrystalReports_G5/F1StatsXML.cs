@@ -36,8 +36,7 @@ namespace CrystalReports_G5
             string filePath = FileBox.Text.Trim();
             lines = LoadData.ReadFile(filePath);
             LoadData.FillDataInDict(lines, Drivers, RTeams, GPs);
-            if (lines.Count > 0)
-                loaded = true;
+            loaded = lines.Count > 0;
         }
 
         private void ButtonBrowse_Click(object sender, EventArgs e)
@@ -55,22 +54,8 @@ namespace CrystalReports_G5
         private void TypeEmployeeMultiBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             NameMultiBox.SelectedIndex = -1;
-
             string seleccion = (string) TypeEmployeeMultiBox.SelectedItem;
-            NameMultiBox.Items.Clear();  // Limpia los elementos existentes en el segundo ListBox
-
-            if(seleccion == "Grand Prix")
-            {
-                NameMultiBox.Items.AddRange(GPs.Values.ToArray());
-            }
-            else if (seleccion == "Pilot")
-            {
-                NameMultiBox.Items.AddRange(Drivers.Values.ToArray());
-            }
-            else
-            {
-                NameMultiBox.Items.AddRange(RTeams.Values.ToArray());
-            }
+            ShowData.UpdateNameMultiBox(seleccion, NameMultiBox, GPs, Drivers, RTeams);
         }
 
         private void NameMultiBox_SelectedIndexChanged(object sender, EventArgs e)
