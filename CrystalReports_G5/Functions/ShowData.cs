@@ -34,33 +34,30 @@ namespace CrystalReports_G5
                         string gp_name = gp.Value;
                         if (points_id.Contains(gp_id))
                         {
-                            query.Add(gp_name.PadRight(25) + points_value);
+                            query.Add($"{gp_name,-25}{points_value}");
                         }
                     }
                 }
             }
+
             query.Add("--------------------------------------------------------------------------------------------------");
             return query;
         }
-
-
 
         public static List<string> RacingTeamView(string rt_name)
         {
             id = DictionaryPoints.GetId(rt_name);
             List<string> RTDrivers = new List<string>();
 
+            int total_points_1 = 0;
+            int total_points_2 = 0;
 
-            int total_points_1 = 0,
-                total_points_2 = 0;
             query.Add("--------------------------------------------------------------------------------------------------");
             query.Add(rt_name);
             query.Add("--------------------------------------------------------------------------------------------------");
 
-
             foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord)
             {
-
                 string points_value = points.Value;
                 string points_id = points.Key;
 
@@ -70,30 +67,33 @@ namespace CrystalReports_G5
                     {
                         string driver_id = driver.Key;
                         string driver_name = driver.Value;
+
                         if (points_id.Contains(driver_id))
                         {
-                            if (RTDrivers.Count < 2)
+                            RTDrivers.Add(driver_name);
+
+                            int driver_points = int.Parse(points_value);
+                            if (RTDrivers.Count == 1)
                             {
-                                RTDrivers.Add(driver_name);
+                                total_points_1 += driver_points;
                             }
-                            if (RTDrivers[0] == driver_name)
+                            else if (RTDrivers.Count == 2)
                             {
-                                total_points_1 += int.Parse(points_value);
-                            }
-                            else
-                            {
-                                total_points_2 += int.Parse(points_value);
+                                total_points_2 += driver_points;
                             }
                         }
                     }
                 }
             }
-            query.Add(RTDrivers[0].PadRight(20) + Convert.ToString(total_points_1));
-            query.Add(RTDrivers[1].PadRight(20) + Convert.ToString(total_points_2));
+
+            query.Add($"{RTDrivers[0],-20}{total_points_1}");
+            query.Add($"{RTDrivers[1],-20}{total_points_2}");
             query.Add("--------------------------------------------------------------------------------------------------");
-            query.Add((GetBestRt()));
+            query.Add(GetBestRt());
+
             return query;
         }
+
 
 
         public static int GetRtPoints(string id)
@@ -237,6 +237,25 @@ namespace CrystalReports_G5
             foreach (string line in searchList)
             {
                 textBox.Text += line + Environment.NewLine;
+            }
+        }
+
+        public static void UpdateNameMultiBox(string selection, ComboBox NameMultibox, Dictionary<string, string> GPs, Dictionary<string, string> Drivers, Dictionary<string, string> RTeams)
+        {
+            NameMultibox.SelectedIndex = -1;
+            NameMultibox.Items.Clear();
+
+            if (selection == "Grand Prix")
+            {
+                NameMultibox.Items.AddRange(GPs.Values.ToArray());
+            }
+            else if (selection == "Pilot")
+            {
+                NameMultibox.Items.AddRange(Drivers.Values.ToArray());
+            }
+            else
+            {
+                NameMultibox.Items.AddRange(RTeams.Values.ToArray());
             }
         }
     }
