@@ -142,7 +142,7 @@ namespace CrystalReports_G5
 
         private void statisticsbutton_Click(object sender, EventArgs e)
         {
-            if (loades)
+            if (loaded)
             {
                 searchList = ShowData.ViewStatistics();
                 ShowData.WriteTextBox(searchList, QueryTextBox);
