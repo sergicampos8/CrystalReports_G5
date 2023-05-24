@@ -82,13 +82,21 @@ namespace CrystalReports_G5
 
         private void searchbutton_Click(object sender, EventArgs e)
         {
+            QueryTextBox.Text = "";
             string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
             string selection2 = (string)NameMultiBox.SelectedItem;
             searchList.Clear();
             searchList = ShowData.SelectView(selection1, selection2);
 
-            QueryTextBox.Text = "";
-            QueryTextBox.Text = string.Join(Environment.NewLine, searchList);
+            string text = "";
+            for (int i = 0; i < searchList.Count; i++)
+            {
+                text += searchList[i];
+                if (i < searchList.Count - 1)
+                {
+                    text += Environment.NewLine;
+                }
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -106,11 +114,18 @@ namespace CrystalReports_G5
             string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
             string selection2 = (string)NameMultiBox.SelectedItem;
             searchList = ShowData.SelectView(selection1, selection2);
-            foreach(string line in searchList)
-            {
-                QueryTextBox.Text += line;
-            }
             //QueryTextBox.Text = string.Join(Environment.NewLine, searchList);
+            string text = "";
+            for (int i = 0; i < searchList.Count; i++)
+            {
+                text += searchList[i];
+                if (i < searchList.Count - 1)
+                {
+                    text += Environment.NewLine;
+                }
+            }
+
+            QueryTextBox.Text = text;
         }
     }
 }
