@@ -85,14 +85,10 @@ namespace CrystalReports_G5
 
                 if (selection1 != null && selection2 != null)
                 {
-
-
                     searchList.Clear();
                     searchList = ShowData.SelectView(selection1, selection2);
 
                     ShowData.WriteTextBox(searchList, QueryTextBox);
-
-
                 }
             }
         }
@@ -118,22 +114,19 @@ namespace CrystalReports_G5
                 if (selection1 != null && selection2 != null)
                 {
                     searchList = ShowData.SelectView(selection1, selection2);
-
                     ShowData.WriteTextBox(searchList, QueryTextBox);
-
                 }
             }
         }
 
         private void statisticsbutton_Click(object sender, EventArgs e)
         {
-            if (loades)
+            if (loaded)
             {
+                searchList.Clear();
                 searchList = ShowData.ViewStatistics();
                 ShowData.WriteTextBox(searchList, QueryTextBox);
-            }
-            
-            
+            }                      
         }
     }
 }

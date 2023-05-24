@@ -74,11 +74,11 @@ namespace CrystalReports_G5
                             RTDrivers.Add(driver_name);
 
                             int driver_points = int.Parse(points_value);
-                            if (RTDrivers.Count == 1)
+                            if (RTDrivers[0] == driver_name)
                             {
                                 total_points_1 += driver_points;
                             }
-                            else if (RTDrivers.Count == 2)
+                            else if (RTDrivers[1] == driver_name)
                             {
                                 total_points_2 += driver_points;
                             }
@@ -90,7 +90,6 @@ namespace CrystalReports_G5
             query.Add($"{RTDrivers[0],-20}{total_points_1}");
             query.Add($"{RTDrivers[1],-20}{total_points_2}");
             query.Add("--------------------------------------------------------------------------------------------------");
-            query.Add(GetBestRt());
             return query;
         }
 
