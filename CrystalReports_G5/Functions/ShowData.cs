@@ -39,6 +39,7 @@ namespace CrystalReports_G5
                 }
             }
             query.Add("--------------------------------------------------------------------------------------------------");
+            
             return query;
         }
 
@@ -90,10 +91,181 @@ namespace CrystalReports_G5
             query.Add(RTDrivers[0].PadRight(20) + Convert.ToString(total_points_1));
             query.Add(RTDrivers[1].PadRight(20) + Convert.ToString(total_points_2));
             query.Add("--------------------------------------------------------------------------------------------------");
-            query.Add((GetBestRt()));
+            
             return query;
         }
 
+
+        
+
+        public static List<string> GPView(string GP_name)
+        {
+            int position = 0;
+            id = DictionaryPoints.GetGpId(GP_name);
+
+            query.Add("--------------------------------------------------------------------------------------------------");
+            query.Add(GP_name);
+            query.Add("--------------------------------------------------------------------------------------------------");
+
+            foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord)
+            {
+                string points_value = points.Value;
+                string points_id = points.Key;
+
+                if (points_id.Contains(id))
+                {
+                    foreach (KeyValuePair<string, string> driver in F1StatsXML.Drivers)
+                    {
+                        string driver_id = driver.Key;
+                        string driver_name = driver.Value;
+                        if (points_id.Contains(driver_id))
+                        {
+                            position++;
+                            query.Add(Convert.ToString(position).PadRight(10) + points_value.PadRight(15) + driver_name);
+                        }
+                    }
+                }
+            }
+            query.Add("--------------------------------------------------------------------------------------------------");
+            
+            return query;
+        }
+
+
+
+
+        public static List<string> ViewStatistics()
+        {
+            List<string> Stats = new List<string>();
+            Stats.Add("--------------------------------------------------------------------------------------------------");
+            Stats.Add("Statistics");
+            Stats.Add("--------------------------------------------------------------------------------------------------");
+            Stats.Add((GetBestRt()));
+            Stats.Add(GetBestDriver());
+            Stats.Add(GetBestDriverWins());
+            Stats.Add("--------------------------------------------------------------------------------------------------");
+
+            return Stats;
+
+        }
+
+        public static string GetGpFirstPlace(string id)
+        {
+            string first_driver = "";
+
+            foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord)
+            {
+                string points_value = points.Value;
+                string points_id = points.Key;
+
+                if (points_id.Contains(id))
+                {
+                    foreach (KeyValuePair<string, string> driver in F1StatsXML.Drivers)
+                    {
+                        string driver_id = driver.Key;
+                        string driver_name = driver.Value;
+                        if (points_id.Contains(driver_id) && points_value == "25")
+                        {
+                            first_driver = driver_name;
+                        }
+                    }
+                }
+            }
+
+            return first_driver;
+        }
+
+        public static string GetBestDriverWins()
+        {
+            
+            int n_wins = 0; string wins_driver = "", driver_n = ""; 
+            List<string> GpFirst = new List<string>();
+
+            foreach (KeyValuePair<string, string> gp in F1StatsXML.GPs)
+            {
+                string gp_id = gp.Key;
+                string gp_name = gp.Value;
+                GpFirst.Add(GetGpFirstPlace(gp_id));
+            }
+            
+            foreach (KeyValuePair<string, string> driver in F1StatsXML.Drivers)
+            {
+                int count = 0;
+                string driver_id = driver.Key;
+                string driver_name = driver.Value;
+                foreach (string fdriver in GpFirst)
+                {
+                    if (fdriver == driver_name)
+                    {
+                        count++;
+                    }
+                }
+                if (count > n_wins)
+                {
+                    n_wins = count;
+                    driver_n = driver_name;
+                }
+            }
+                
+
+            wins_driver = "Driver with most races won (" + (n_wins).ToString() + "): " + driver_n; 
+            return wins_driver;
+        }
+
+        public static int GetDriverPoints(string id)
+        {
+            int d_points = 0;
+
+            foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord)
+            {
+                string points_value = points.Value;
+                string points_id = points.Key;
+
+                if (points_id.Contains(id))
+                {
+                    foreach (KeyValuePair<string, string> gp in F1StatsXML.GPs)
+                    {
+                        string gp_id = gp.Key;
+                        string gp_name = gp.Value;
+                        if (points_id.Contains(gp_id))
+                        {
+                            d_points += int.Parse(points_value); 
+                        }
+                    }
+                }
+            }
+            return d_points;
+        }
+
+        public static string GetBestDriver()
+        {
+            int max_point; string best_driver = "",
+                                    driver_n = ""; bool comprovar = false;
+            Dictionary<string, int> PointsD = new Dictionary<string, int>();
+
+            foreach (KeyValuePair<string, string> driver in F1StatsXML.Drivers)
+            {
+                string driver_id = driver.Key;
+                string driver_name = driver.Value;
+                PointsD.Add(driver_name, GetDriverPoints(driver_id));
+            }
+            max_point = PointsD.Values.Max();
+
+            while (!comprovar)
+                foreach (KeyValuePair<string, int> pointd in PointsD)
+                {
+                    string name = pointd.Key;
+                    int points = pointd.Value;
+                    if (max_point == points)
+                    {
+                        driver_n = name;
+                        comprovar = true;
+                    }
+                }
+
+            best_driver = "Best Driver (" + (max_point).ToString() + "): " + driver_n;
+            return best_driver;
+        }
 
         public static int GetRtPoints(string id)
         {
@@ -139,8 +311,10 @@ namespace CrystalReports_G5
 
         public static string GetBestRt()
         {
-            int max_point; string best_rt = ""; bool comprovar = false; 
-            Dictionary<string,int> PointsRt = new Dictionary<string,int>();
+            int max_point; string best_rt = "",
+                                  rt = ""; bool comprovar = false;
+            Dictionary<string, int> PointsRt = new Dictionary<string, int>();
+
             foreach (KeyValuePair<string, string> rteam in F1StatsXML.RTeams)
             {
                 string rteam_id = rteam.Key;
@@ -150,62 +324,20 @@ namespace CrystalReports_G5
             max_point = PointsRt.Values.Max();
 
             while (!comprovar)
-            foreach (KeyValuePair<string, int> pointrt in PointsRt)
-            {
-                string name = pointrt.Key;
-                int points = pointrt.Value;
-                if (max_point == points)
+                foreach (KeyValuePair<string, int> pointrt in PointsRt)
+                {
+                    string name = pointrt.Key;
+                    int points = pointrt.Value;
+                    if (max_point == points)
                     {
-                        best_rt = name;
+                        rt = name;
                         comprovar = true;
                     }
-            }
+                }
 
-            best_rt += " " + (max_point).ToString();
+            best_rt = "Best Racing (" + (max_point).ToString() + "): " + rt;
             return best_rt;
         }
-
-        public static List<string> GPView(string GP_name)
-        {
-            int position = 0;
-            id = DictionaryPoints.GetGpId(GP_name);
-
-            query.Add("--------------------------------------------------------------------------------------------------");
-            query.Add(GP_name);
-            query.Add("--------------------------------------------------------------------------------------------------");
-
-            foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord)
-            {
-                string points_value = points.Value;
-                string points_id = points.Key;
-
-                if (points_id.Contains(id))
-                {
-                    foreach (KeyValuePair<string, string> driver in F1StatsXML.Drivers)
-                    {
-                        string driver_id = driver.Key;
-                        string driver_name = driver.Value;
-                        if (points_id.Contains(driver_id))
-                        {
-                            position++;
-                            query.Add(Convert.ToString(position).PadRight(10) + points_value.PadRight(15) + driver_name);
-                        }
-                    }
-                }
-            }
-            query.Add("--------------------------------------------------------------------------------------------------");
-            return query;
-        }
-
-
-
-
-        public static List<string> ViewStatistics()
-        {
-            List<string> Stats = new List<string>();
-            return Stats;
-        }
-
 
         public static List<string> SelectView(string selection1, string selection2)
         {

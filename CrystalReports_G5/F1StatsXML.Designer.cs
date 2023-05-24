@@ -188,6 +188,7 @@ namespace CrystalReports_G5
             this.statisticsbutton.TabIndex = 14;
             this.statisticsbutton.Text = "Statistics";
             this.statisticsbutton.UseVisualStyleBackColor = true;
+            this.statisticsbutton.Click += new System.EventHandler(this.statisticsbutton_Click);
             // 
             // F1StatsXML
             // 

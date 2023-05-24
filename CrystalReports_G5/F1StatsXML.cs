@@ -92,6 +92,7 @@ namespace CrystalReports_G5
 
         private void searchbutton_Click(object sender, EventArgs e)
         {
+            
             if (loaded)
             {
                 string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
@@ -102,7 +103,9 @@ namespace CrystalReports_G5
                 QueryTextBox.Text = "";
                 foreach (string line in searchList)
                 {
-                    QueryTextBox.Text += line;
+                    QueryTextBox.Text += line ;
+                    Console.WriteLine(line);
+                    
                 }
             }
 
@@ -131,6 +134,17 @@ namespace CrystalReports_G5
                 }
             }
 
+        }
+
+        private void statisticsbutton_Click(object sender, EventArgs e)
+        {
+            searchList = ShowData.ViewStatistics();
+            foreach (string line in searchList)
+            {
+                QueryTextBox.Text += line;
+                
+            }
+            
         }
     }
 }
