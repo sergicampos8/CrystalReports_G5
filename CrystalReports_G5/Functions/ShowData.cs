@@ -351,7 +351,7 @@ namespace CrystalReports_G5
         public static void WriteTextBox(List<string> searchList, TextBox textBox)
         {
 
-            textBox.Text = "";
+            //textBox.Text = "";
 
             // Append each line from searchList to the textbox
             foreach (string line in searchList)
