@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CrystalReports_G5
@@ -353,7 +351,7 @@ namespace CrystalReports_G5
         public static void WriteTextBox(List<string> searchList, TextBox textBox)
         {
 
-            textBox.Text = "";
+            //textBox.Text = "";
 
             // Append each line from searchList to the textbox
             foreach (string line in searchList)

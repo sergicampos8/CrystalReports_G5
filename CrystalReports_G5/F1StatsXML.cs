@@ -15,6 +15,7 @@ namespace CrystalReports_G5
         public static Dictionary<string, string> RTeams = new Dictionary<string, string>();
         public static Dictionary<string, string> GPs = new Dictionary<string, string>();
         bool loaded = false;
+        bool statistics = false;
          
         public F1StatsXML()
         {
@@ -28,15 +29,8 @@ namespace CrystalReports_G5
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
-            PointsRecord.Clear();
-            Drivers.Clear();
-            RTeams.Clear();
-            GPs.Clear();
-
             string filePath = FileBox.Text.Trim();
-            lines = LoadData.ReadFile(filePath);
-            LoadData.FillDataInDict(lines, Drivers, RTeams, GPs);
-            loaded = lines.Count > 0;
+            loaded = LoadData.Load(filePath, PointsRecord, Drivers, RTeams, GPs, lines);
         }
 
         private void ButtonBrowse_Click(object sender, EventArgs e)
@@ -86,9 +80,11 @@ namespace CrystalReports_G5
                 if (selection1 != null && selection2 != null)
                 {
                     searchList.Clear();
+                    QueryTextBox.Text = "";
                     searchList = ShowData.SelectView(selection1, selection2);
 
                     ShowData.WriteTextBox(searchList, QueryTextBox);
+                    statistics = false;
                 }
             }
         }
@@ -107,6 +103,11 @@ namespace CrystalReports_G5
         {
             if (loaded)
             {
+                
+                if (!statistics)
+                {
+                    QueryTextBox.Text = "";
+                }
 
                 string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
                 string selection2 = (string)NameMultiBox.SelectedItem;
@@ -115,6 +116,7 @@ namespace CrystalReports_G5
                 {
                     searchList = ShowData.SelectView(selection1, selection2);
                     ShowData.WriteTextBox(searchList, QueryTextBox);
+                    
                 }
             }
         }
@@ -124,8 +126,10 @@ namespace CrystalReports_G5
             if (loaded)
             {
                 searchList.Clear();
+                QueryTextBox.Text = "";
                 searchList = ShowData.ViewStatistics();
                 ShowData.WriteTextBox(searchList, QueryTextBox);
+                statistics = true;
             }                      
         }
     }
