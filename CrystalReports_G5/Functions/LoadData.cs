@@ -14,100 +14,66 @@ namespace CrystalReports_G5
         public static string gp_name, pilot_name, score, rteam_name,id;
 
 
-        public static void FillDataInDict(List<string> lines, Dictionary<string,string> drivers, Dictionary<string, string> rteams, Dictionary<string, string> GPs)
+        public static void FillDataInDict(List<string> lines, Dictionary<string, string> drivers, Dictionary<string, string> rteams, Dictionary<string, string> GPs)
         {
-
-            string elementname, data;
-            bool rightelement;
             foreach (string linea in lines)
             {
-                elementname = GetElementName(linea);
-                rightelement = Checkelement(elementname);
-
-                if (rightelement)
+                string elementname = GetElementName(linea);
+                if (Checkelement(elementname))
                 {
-                    data = GetElementData(linea);
+                    string data = GetElementData(linea);
                     DataInDict(data, elementname, drivers, rteams, GPs);
                 }
             }
-
         }
 
         public static string BrowseFile()
         {
-            string rutaArchivo = "";
-
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = "Seleccionar archivo";
-            openFileDialog.Filter = "Archivos XML (*.xml)|*.xml";
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                // El usuario ha seleccionado un archivo
-                rutaArchivo = openFileDialog.FileName;
-            }
+                Title = "Seleccionar archivo",
+                Filter = "Archivos XML (*.xml)|*.xml"
+            };
 
-            return rutaArchivo;
+            return openFileDialog.ShowDialog() == DialogResult.OK ? openFileDialog.FileName : "";
         }
 
         public static List<string> ReadFile(string filePath)
         {
             List<string> ListXML = new List<string>();
 
-            if (File.Exists(filePath))
+            try
             {
-                try
-                {
-                    using (StreamReader sr = new StreamReader(filePath))
-                    {
-                        string linea;
-                        while ((linea = sr.ReadLine()) != null)
-                        {
-                            ListXML.Add(linea);
-                        }
-                    }
-                    // Hacer algo con el contenido del archivo
-                    MessageBox.Show("Archivo " + filePath + " leído Correctamente");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al leer el archivo:\n" + ex.Message, "Error de Lectura", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                ListXML = File.ReadAllLines(filePath).ToList();
+                // Una vez se leen todas las lineas
+                MessageBox.Show("Archivo " + filePath + " leído correctamente");
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("El archivo no existe.", "Archivo no Encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Error al leer el archivo:\n" + ex.Message, "Error de Lectura", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
             return ListXML;
         }
 
+
         public static string GetElementName(string xml)
         {
-            int principio, final, espacio;
-            string element;
+            int principio = xml.IndexOf('<');
+            int final = xml.IndexOf('>', principio);
 
-            // Encontrar el principio del elemento
-            principio = xml.IndexOf('<');
-            if (principio == -1)
+            if (principio == -1 || final == -1)
             {
                 // XML inválido
                 return null;
             }
 
-            // Encontrar el final del elemento
-            final = xml.IndexOf('>', principio);
-            if (final == -1)
-            {
-                // XML inválido
-                return null;
-            }
-            // Extraer el nombre del elemento
-            element = xml.Substring(principio + 1, final - principio - 1);
-            // Verificar Atributos
-            espacio = element.IndexOf(' ');
+            string element = xml.Substring(principio + 1, final - principio - 1);
+            int espacio = element.IndexOf(' ');
+
             if (espacio != -1)
             {
-                element = element.Substring(0, espacio - 1);
+                element = element.Substring(0, espacio);
             }
 
             return element;
@@ -115,17 +81,15 @@ namespace CrystalReports_G5
 
         public static string GetElementData(string xmlLine)
         {
+            int start = xmlLine.IndexOf('>') + 1;
+            int end = xmlLine.LastIndexOf('<');
+
+            if (start >= 0 && end >= 0 && end > start)
             {
-                int start, end;
-                string data;
-                // Necesitamos conseguir la segunda aparición de el carácter >
-                start = xmlLine.IndexOf('>') + 1;
-                // Conseguimos la primera aparicion del caracter <
-                end = xmlLine.LastIndexOf('<');
-                // Creamos la substring de los datos, como in
-                data = xmlLine.Substring(start, end - start);
-                return data;
+                return xmlLine.Substring(start, end - start);
             }
+
+            return null;
         }
 
         public static bool Checkelement(string elementname)
@@ -146,30 +110,35 @@ namespace CrystalReports_G5
                 gp_name = data;
                 id = DictionaryPoints.GetGpId(data);
                 if (Distinct(GPs, data))
+                {
                     GPs.Add(id, data);
+                }
             }
             else if (elementname == "Score")
             {
                 score = data;
             }
-            //Sabiendo que cada vez que el nombre cambie queremos guardar los puntos, iniciamos la funcion de guardar puntos en este if 
             else if (elementname == "Name")
             {
                 pilot_name = data;
                 id = DictionaryPoints.GetId(data);
                 if (Distinct(drivers, data))
-                    drivers.Add(id,data);
-                
+                {
+                    drivers.Add(id, data);
+                }
             }
             else
             {
                 rteam_name = data;
                 id = DictionaryPoints.GetId(data);
                 if (Distinct(rteams, data))
+                {
                     rteams.Add(id, data);
+                }
                 PointsToDictionary(F1StatsXML.PointsRecord, gp_name, pilot_name, score, rteam_name);
             }
         }
+
 
         public static void PointsToDictionary(Dictionary<string, string> Pointsrecord, string gp_name, string pilot_name, string score, string rteam_name)
         {
@@ -178,25 +147,6 @@ namespace CrystalReports_G5
             id = DictionaryPoints.GetPointsId(gp_name, pilot_name, rteam_name);
             Pointsrecord.Add(id, score);
         }
-
-
-        public static void WriteList(List<string> list)
-        {
-            foreach (string linea in list)
-            {
-                Console.WriteLine(linea);
-            }
-
-        }
-
-        public static void WriteDictionary(Dictionary<string, string> dictionary)
-        {
-            foreach (KeyValuePair<string, string> element in dictionary)
-            {
-                Console.WriteLine("Key = {0}, Value = {1}",element.Key, element.Value);
-            }
-        }
-
 
         public static bool Distinct(Dictionary<string, string> list, string data)
         {

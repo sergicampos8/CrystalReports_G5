@@ -15,9 +15,8 @@ namespace CrystalReports_G5
             string csvFilePath;
             List<string> filteredLines = new List<string>();
 
-            string gpName, position, name, team, score;
+            string gpName = "", position = "", name = "", team = "", score = "";
 
-            gpName = ""; position = ""; name = ""; team = ""; score = "";
             foreach (string line in lines)
             {
                 if (line.Contains("<GPName>"))
@@ -41,13 +40,14 @@ namespace CrystalReports_G5
                     score = LoadData.GetElementData(line);
                 }
 
-                if (gpName != "" && position != "" && name != "" && team != "" && score != "")
+                if (!string.IsNullOrEmpty(gpName) && !string.IsNullOrEmpty(position) && !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(team) && !string.IsNullOrEmpty(score))
                 {
                     string csvLine = $"{gpName};{position};{name};{team};{score}";
                     filteredLines.Add(csvLine);
-                    position = ""; name = ""; team = ""; score = "";
+                    position = name = team = score = "";
                 }
             }
+
             filteredLines.Insert(0, "GP;Position;Driver;Team;Points");
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -62,13 +62,13 @@ namespace CrystalReports_G5
                 File.WriteAllLines(csvFilePath, filteredLines);
 
                 MessageBox.Show("La información se ha guardado en el archivo CSV.");
-
             }
             else
             {
                 MessageBox.Show("Ha cancelado la operación");
             }
         }
+
         static string GetPosition(string line)
         {
             int startIndex = line.IndexOf(" position=\"") + 11;
