@@ -96,19 +96,19 @@ namespace CrystalReports_G5
             {
                 string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
                 string selection2 = (string)NameMultiBox.SelectedItem;
-                searchList.Clear();
-                searchList = ShowData.SelectView(selection1, selection2);
 
-                QueryTextBox.Text = "";
-                foreach (string line in searchList)
+                if (selection1 != null && selection2 != null)
                 {
-                    QueryTextBox.Text += line;
+                    searchList.Clear();
+                    searchList = ShowData.SelectView(selection1, selection2);
+
+                    ShowData.WriteTextBox(searchList, QueryTextBox);
+
                 }
             }
-
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        public void textBox1_TextChanged(object sender, EventArgs e)
         {
             
         }
@@ -122,15 +122,18 @@ namespace CrystalReports_G5
         {
             if (loaded)
             {
+
                 string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
                 string selection2 = (string)NameMultiBox.SelectedItem;
-                searchList = ShowData.SelectView(selection1, selection2);
-                foreach (string line in searchList)
+
+                if (selection1 != null && selection2 != null)
                 {
-                    QueryTextBox.Text += line;
+                    searchList = ShowData.SelectView(selection1, selection2);
+
+                    ShowData.WriteTextBox(searchList, QueryTextBox);
+
                 }
             }
-
         }
     }
 }
