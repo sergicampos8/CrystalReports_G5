@@ -29,15 +29,8 @@ namespace CrystalReports_G5
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
-            PointsRecord.Clear();
-            Drivers.Clear();
-            RTeams.Clear();
-            GPs.Clear();
-
             string filePath = FileBox.Text.Trim();
-            lines = LoadData.ReadFile(filePath);
-            LoadData.FillDataInDict(lines, Drivers, RTeams, GPs);
-            loaded = lines.Count > 0;
+            loaded = LoadData.Load(filePath, PointsRecord, Drivers, RTeams, GPs, lines);
         }
 
         private void ButtonBrowse_Click(object sender, EventArgs e)
