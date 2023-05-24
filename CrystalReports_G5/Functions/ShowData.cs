@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CrystalReports_G5
@@ -75,11 +73,11 @@ namespace CrystalReports_G5
                             RTDrivers.Add(driver_name);
 
                             int driver_points = int.Parse(points_value);
-                            if (RTDrivers.Count == 1)
+                            if (RTDrivers[0] == driver_name)
                             {
                                 total_points_1 += driver_points;
                             }
-                            else if (RTDrivers.Count == 2)
+                            else if (RTDrivers[1] == driver_name)
                             {
                                 total_points_2 += driver_points;
                             }
@@ -91,7 +89,6 @@ namespace CrystalReports_G5
             query.Add($"{RTDrivers[0],-20}{total_points_1}");
             query.Add($"{RTDrivers[1],-20}{total_points_2}");
             query.Add("--------------------------------------------------------------------------------------------------");
-            query.Add(GetBestRt());
             return query;
         }
 
@@ -355,7 +352,7 @@ namespace CrystalReports_G5
         public static void WriteTextBox(List<string> searchList, TextBox textBox)
         {
 
-            textBox.Text = "";
+            //textBox.Text = "";
 
             // Append each line from searchList to the textbox
             foreach (string line in searchList)

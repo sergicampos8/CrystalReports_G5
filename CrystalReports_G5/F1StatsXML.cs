@@ -16,7 +16,8 @@ namespace CrystalReports_G5
         public static Dictionary<string, string> RTeams = new Dictionary<string, string>();
         public static Dictionary<string, string> GPs = new Dictionary<string, string>();
         bool loaded = false;
-
+        bool statistics = false;
+         
         public F1StatsXML()
         {
             InitializeComponent();
@@ -30,23 +31,8 @@ namespace CrystalReports_G5
         // Event handler para el evento "Click" del botón "LoadButton"
         private void LoadButton_Click(object sender, EventArgs e)
         {
-            // Se limpian los diccionarios y listas existentes
-            PointsRecord.Clear();
-            Drivers.Clear();
-            RTeams.Clear();
-            GPs.Clear();
-
-            // Se obtiene la ruta del archivo especificada en el campo de texto "FileBox"
             string filePath = FileBox.Text.Trim();
-
-            // Se leen las líneas del archivo y se almacenan en la lista "lines"
-            lines = LoadData.ReadFile(filePath);
-
-            // Se llena la información en los diccionarios "Drivers", "RTeams" y "GPs"
-            LoadData.FillDataInDict(lines, Drivers, RTeams, GPs);
-
-            // Se actualiza el indicador "loaded" según la cantidad de líneas leídas
-            loaded = lines.Count > 0;
+            loaded = LoadData.Load(filePath, PointsRecord, Drivers, RTeams, GPs, lines);
         }
 
         // Event handler para el evento "Click" del botón "ButtonBrowse"
@@ -105,14 +91,12 @@ namespace CrystalReports_G5
 
                 if (selection1 != null && selection2 != null)
                 {
-
-
                     searchList.Clear();
+                    QueryTextBox.Text = "";
                     searchList = ShowData.SelectView(selection1, selection2);
 
                     ShowData.WriteTextBox(searchList, QueryTextBox);
-
-
+                    statistics = false;
                 }
             }
         }
@@ -133,6 +117,10 @@ namespace CrystalReports_G5
             // Si hay datos cargados y se han seleccionado valores en los ListBox "TypeEmployeeMultiBox" y "NameMultiBox"
             if (loaded)
             {
+                if (!statistics)
+                {
+                    QueryTextBox.Text = "";
+                }
                 string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
                 string selection2 = (string)NameMultiBox.SelectedItem;
 
@@ -140,7 +128,6 @@ namespace CrystalReports_G5
                 {
                     // Se obtienen los resultados de búsqueda según las selecciones realizadas
                     searchList = ShowData.SelectView(selection1, selection2);
-
                     // Se escriben los resultados de búsqueda en el cuadro de texto "QueryTextBox"
                     ShowData.WriteTextBox(searchList, QueryTextBox);
                 }
@@ -149,13 +136,14 @@ namespace CrystalReports_G5
 
         private void statisticsbutton_Click(object sender, EventArgs e)
         {
-            if (loades)
+            if (loaded)
             {
+                searchList.Clear();
+                QueryTextBox.Text = "";
                 searchList = ShowData.ViewStatistics();
                 ShowData.WriteTextBox(searchList, QueryTextBox);
-            }
-            
-            
+                statistics = true;
+            }                      
         }
     }
 }
