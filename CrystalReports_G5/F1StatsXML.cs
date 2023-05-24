@@ -97,7 +97,7 @@ namespace CrystalReports_G5
         // Event handler para el evento "Click" del botón "searchbutton"
         private void searchbutton_Click(object sender, EventArgs e)
         {
-            // Si hay datos cargados y se han seleccionado valores en los ListBox "TypeEmployeeMultiBox" y "NameMultiBox"
+            
             if (loaded)
             {
                 string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
@@ -105,12 +105,14 @@ namespace CrystalReports_G5
 
                 if (selection1 != null && selection2 != null)
                 {
-                    // Se limpia la lista de búsqueda y se obtienen los resultados de búsqueda según las selecciones realizadas
+
+
                     searchList.Clear();
                     searchList = ShowData.SelectView(selection1, selection2);
 
-                    // Se escriben los resultados de búsqueda en el cuadro de texto "QueryTextBox"
                     ShowData.WriteTextBox(searchList, QueryTextBox);
+
+
                 }
             }
         }
@@ -143,6 +145,17 @@ namespace CrystalReports_G5
                     ShowData.WriteTextBox(searchList, QueryTextBox);
                 }
             }
+        }
+
+        private void statisticsbutton_Click(object sender, EventArgs e)
+        {
+            if (loades)
+            {
+                searchList = ShowData.ViewStatistics();
+                ShowData.WriteTextBox(searchList, QueryTextBox);
+            }
+            
+            
         }
     }
 }
