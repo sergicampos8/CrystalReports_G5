@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CrystalReports_G5
 {
@@ -90,11 +91,80 @@ namespace CrystalReports_G5
             query.Add(RTDrivers[0].PadRight(20) + Convert.ToString(total_points_1));
             query.Add(RTDrivers[1].PadRight(20) + Convert.ToString(total_points_2));
             query.Add("--------------------------------------------------------------------------------------------------");
+            query.Add((GetBestRt()));
             return query;
         }
 
-        
 
+        public static int GetRtPoints(string id)
+        {
+            int points_p1 = 0,
+                points_p2 = 0,
+                total_points;
+            List<string> RTDrivers = new List<string>();
+
+
+            foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord)
+            {
+
+                string points_value = points.Value;
+                string points_id = points.Key;
+
+                if (points_id.Contains(id))
+                {
+                    foreach (KeyValuePair<string, string> driver in F1StatsXML.Drivers)
+                    {
+                        string driver_id = driver.Key;
+                        string driver_name = driver.Value;
+                        if (points_id.Contains(driver_id))
+                        {
+                            if (RTDrivers.Count < 2)
+                            {
+                                RTDrivers.Add(driver_name);
+                            }
+                            if (RTDrivers[0] == driver_name)
+                            {
+                                points_p1 += int.Parse(points_value);
+                            }
+                            else
+                            {
+                                points_p2 += int.Parse(points_value);
+                            }
+                        }
+                    }
+                }
+            }
+            total_points = points_p1 + points_p2;
+            return total_points;
+        }
+
+        public static string GetBestRt()
+        {
+            int max_point; string best_rt = ""; bool comprovar = false; 
+            Dictionary<string,int> PointsRt = new Dictionary<string,int>();
+            foreach (KeyValuePair<string, string> rteam in F1StatsXML.RTeams)
+            {
+                string rteam_id = rteam.Key;
+                string rteam_name = rteam.Value;
+                PointsRt.Add(rteam_name, GetRtPoints(rteam_id));
+            }
+            max_point = PointsRt.Values.Max();
+
+            while (!comprovar)
+            foreach (KeyValuePair<string, int> pointrt in PointsRt)
+            {
+                string name = pointrt.Key;
+                int points = pointrt.Value;
+                if (max_point == points)
+                    {
+                        best_rt = name;
+                        comprovar = true;
+                    }
+            }
+
+            best_rt += " " + (max_point).ToString();
+            return best_rt;
+        }
 
         public static List<string> GPView(string GP_name)
         {
@@ -130,17 +200,19 @@ namespace CrystalReports_G5
 
 
 
-        //public static List<string> ViewStatistics()
-        //{
 
-                
-        //}
+        public static List<string> ViewStatistics()
+        {
+            List<string> Stats = new List<string>();
+            return Stats;
+        }
+
 
         public static List<string> SelectView(string selection1, string selection2)
         {
             List<string> QList = new List<string>();
 
-            if (selection1 == "Grand Prix")
+            if (selection1 == "Grand Prix")            
             {
                 QList = ShowData.GPView(selection2);
             }
@@ -154,6 +226,18 @@ namespace CrystalReports_G5
             }
 
             return QList;
+        }
+
+        public static void WriteTextBox(List<string> searchList, TextBox textBox)
+        {
+
+            textBox.Text = "";
+
+            // Append each line from searchList to the textbox
+            foreach (string line in searchList)
+            {
+                textBox.Text += line + Environment.NewLine;
+            }
         }
     }
 }
