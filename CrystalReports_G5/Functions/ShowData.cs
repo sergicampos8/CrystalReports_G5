@@ -43,6 +43,7 @@ namespace CrystalReports_G5
             return query;
         }
 
+
         public static List<string> RacingTeamView(string rt_name)
         {
             id = DictionaryPoints.GetId(rt_name);
