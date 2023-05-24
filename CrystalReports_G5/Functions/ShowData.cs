@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CrystalReports_G5
 {
@@ -343,7 +344,8 @@ namespace CrystalReports_G5
         {
             List<string> QList = new List<string>();
 
-            if (selection1 == "Grand Prix")            {
+            if (selection1 == "Grand Prix")            
+            {
                 QList = ShowData.GPView(selection2);
             }
             else if (selection1 == "Pilot")
@@ -356,6 +358,18 @@ namespace CrystalReports_G5
             }
 
             return QList;
+        }
+
+        public static void WriteTextBox(List<string> searchList, TextBox textBox)
+        {
+
+            textBox.Text = "";
+
+            // Append each line from searchList to the textbox
+            foreach (string line in searchList)
+            {
+                textBox.Text += line + Environment.NewLine;
+            }
         }
     }
 }
