@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CrystalReports_G5
@@ -13,6 +10,37 @@ namespace CrystalReports_G5
     {
         public static string gp_name, pilot_name, score, rteam_name,id;
 
+
+        public static bool Load(string filepath, Dictionary<string, string> PointsRecord, Dictionary<string, string> drivers, Dictionary<string, string> rteams, Dictionary<string, string> GPs, List<string> lines)
+        {
+            PointsRecord.Clear();
+            drivers.Clear();
+            rteams.Clear();
+            GPs.Clear();
+
+            bool loaded = false;
+
+            if(File.Exists(filepath))
+            {
+                try
+                {
+                    lines = ReadFile(filepath);
+                    FillDataInDict(lines, drivers, rteams, GPs);
+                    MessageBox.Show("Archivo " + filepath + " leído correctamente");
+                    loaded = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al leer el archivo:\n" + ex.Message, "Error de Lectura", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else 
+            {
+                MessageBox.Show("El Archivo seleccionado no existe\n", "Error de Lectura", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return loaded;
+
+        }
 
         public static void FillDataInDict(List<string> lines, Dictionary<string, string> drivers, Dictionary<string, string> rteams, Dictionary<string, string> GPs)
         {
@@ -42,17 +70,8 @@ namespace CrystalReports_G5
         {
             List<string> ListXML = new List<string>();
 
-            try
-            {
-                ListXML = File.ReadAllLines(filePath).ToList();
-                // Una vez se leen todas las lineas
-                MessageBox.Show("Archivo " + filePath + " leído correctamente");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al leer el archivo:\n" + ex.Message, "Error de Lectura", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
+            ListXML = File.ReadAllLines(filePath).ToList();
+            
             return ListXML;
         }
 
