@@ -8,12 +8,12 @@ namespace CrystalReports_G5
     class ShowData
     {
         public static string id;
-        public static List<string> query = new List<string>();
-
 
         public static List<string> DriversView(string pilot_name)
         {
             id = DictionaryPoints.GetId(pilot_name);
+
+            List<string> query = new List<string>();
 
             query.Add("--------------------------------------------------------------------------------------------------");
             query.Add(pilot_name);
@@ -39,7 +39,7 @@ namespace CrystalReports_G5
             }
 
             query.Add("--------------------------------------------------------------------------------------------------");
-            
+
             return query;
         }
 
@@ -51,6 +51,8 @@ namespace CrystalReports_G5
 
             int total_points_1 = 0;
             int total_points_2 = 0;
+
+            List<string> query = new List<string>();
 
             query.Add("--------------------------------------------------------------------------------------------------");
             query.Add(rt_name);
@@ -97,6 +99,8 @@ namespace CrystalReports_G5
             int position = 0;
             id = DictionaryPoints.GetGpId(GP_name);
 
+            List<string> query = new List<string>();
+
             query.Add("--------------------------------------------------------------------------------------------------");
             query.Add(GP_name);
             query.Add("--------------------------------------------------------------------------------------------------");
@@ -121,7 +125,7 @@ namespace CrystalReports_G5
                 }
             }
             query.Add("--------------------------------------------------------------------------------------------------");
-            
+
             return query;
         }
 
@@ -131,13 +135,14 @@ namespace CrystalReports_G5
             Stats.Add("--------------------------------------------------------------------------------------------------");
             Stats.Add("Statistics");
             Stats.Add("--------------------------------------------------------------------------------------------------");
-            Stats.Add((GetBestRt()));
+            Stats.Add(GetBestRt());
             Stats.Add(GetBestDriver());
             Stats.Add(GetBestDriverWins());
             Stats.Add("--------------------------------------------------------------------------------------------------");
 
             return Stats;
         }
+
 
         public static string GetGpFirstPlace(string id)
         {
@@ -329,37 +334,39 @@ namespace CrystalReports_G5
             return best_rt;
         }
 
-        public static List<string> SelectView(string selection1, string selection2)
+        public static List<string> SelectView(string selection1, string selection2, List<string> list)
         {
-            List<string> QList = new List<string>();
+
+            list.Clear();
 
             if (selection1 == "Grand Prix")            
             {
-                QList = ShowData.GPView(selection2);
+                list = ShowData.GPView(selection2);
             }
             else if (selection1 == "Pilot")
             {
-                QList = ShowData.DriversView(selection2);
+                list = ShowData.DriversView(selection2);
             }
             else
             {
-                QList = ShowData.RacingTeamView(selection2);
+                list = ShowData.RacingTeamView(selection2);
             }
 
-            return QList;
+            return list;
         }
 
         public static void WriteTextBox(List<string> searchList, TextBox textBox)
         {
 
-            //textBox.Text = "";
-
             // Append each line from searchList to the textbox
+            textBox.Text = "";
+
             foreach (string line in searchList)
             {
                 textBox.Text += line + Environment.NewLine;
             }
         }
+
 
         public static void UpdateNameMultiBox(string selection, ComboBox NameMultibox, Dictionary<string, string> GPs, Dictionary<string, string> Drivers, Dictionary<string, string> RTeams)
         {

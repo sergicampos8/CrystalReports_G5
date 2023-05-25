@@ -10,13 +10,15 @@ namespace CrystalReports_G5
     {
         //Declaración de diccionarios, Listas y booleano para control de errores
         List<string> searchList = new List<string>();
+        List<string> appendlist = new List<string>();
+
         List<string> lines = new List<string>();
         public static Dictionary<string, string> PointsRecord = new Dictionary<string, string>();
         public static Dictionary<string, string> Drivers = new Dictionary<string, string>();
         public static Dictionary<string, string> RTeams = new Dictionary<string, string>();
         public static Dictionary<string, string> GPs = new Dictionary<string, string>();
         bool loaded = false;
-        bool statistics = false;
+        string SaveFilePath;
          
         public F1StatsXML()
         {
@@ -90,12 +92,10 @@ namespace CrystalReports_G5
 
                 if (selection1 != null && selection2 != null)
                 {
-                    searchList.Clear();
-                    QueryTextBox.Text = "";
-                    searchList = ShowData.SelectView(selection1, selection2);
+                    searchList = ShowData.SelectView(selection1, selection2, searchList);
 
                     ShowData.WriteTextBox(searchList, QueryTextBox);
-                    statistics = false;
+                    SaveFilePath = WriteSearch.SaveListInFile(searchList, SaveFilePath);
                 }
             }
         }
@@ -115,20 +115,21 @@ namespace CrystalReports_G5
         {
             // Si hay datos cargados y se han seleccionado valores en los ListBox "TypeEmployeeMultiBox" y "NameMultiBox"
             if (loaded)
-            {
-                if (!statistics)
-                {
-                    QueryTextBox.Text = "";
-                }
+            {                        
                 string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
                 string selection2 = (string)NameMultiBox.SelectedItem;
 
                 if (selection1 != null && selection2 != null)
                 {
                     // Se obtienen los resultados de búsqueda según las selecciones realizadas
-                    searchList = ShowData.SelectView(selection1, selection2);
+                    appendlist = ShowData.SelectView(selection1, selection2, appendlist);
+                    searchList = WriteSearch.JoinLists(searchList, appendlist);
+
                     // Se escriben los resultados de búsqueda en el cuadro de texto "QueryTextBox"
+
                     ShowData.WriteTextBox(searchList, QueryTextBox);
+                    SaveFilePath = WriteSearch.SaveListInFile(searchList, SaveFilePath);
+
                 }
             }
         }
@@ -138,11 +139,15 @@ namespace CrystalReports_G5
             if (loaded)
             {
                 searchList.Clear();
-                QueryTextBox.Text = "";
                 searchList = ShowData.ViewStatistics();
                 ShowData.WriteTextBox(searchList, QueryTextBox);
-                statistics = true;
-            }                      
+                SaveFilePath = WriteSearch.SaveListInFile(searchList, SaveFilePath);
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
