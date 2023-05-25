@@ -32,7 +32,8 @@ namespace CrystalReports_G5
         private void LoadButton_Click(object sender, EventArgs e)
         {
             string filePath = FileBox.Text.Trim();
-            loaded = LoadData.Load(filePath, PointsRecord, Drivers, RTeams, GPs, lines);
+            lines = LoadData.Load(filePath, PointsRecord, Drivers, RTeams, GPs, lines);
+            loaded = lines.Count() >= 1;            
         }
 
         // Event handler para el evento "Click" del botón "ButtonBrowse"
@@ -74,10 +75,8 @@ namespace CrystalReports_G5
         private void SaveAsCSVbutton_Click(object sender, EventArgs e)
         {
             // Si hay datos cargados, se invoca la función "GuardarInformacionCSV" de la clase "ExportCSV" para guardar la información en formato CSV
-            if (loaded)
-            {
-                ExportCSV.GuardarInformacionCSV(lines);
-            }
+            ExportCSV.GuardarInformacionCSV(lines, loaded);
+            
         }
 
         // Event handler para el evento "Click" del botón "searchbutton"
