@@ -59,6 +59,7 @@
     <Compile Include="F1StatsXML.Designer.cs">
       <DependentUpon>F1StatsXML.cs</DependentUpon>
     </Compile>
+    <Compile Include="Functions\WriteSearch.cs" />
     <Compile Include="Functions\ShowData.cs" />
     <Compile Include="Functions\ExportCSV.cs" />
     <Compile Include="Functions\DictionaryPoints.cs" />

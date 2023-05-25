@@ -17,7 +17,6 @@ namespace CrystalReports_G5
             rteams.Clear();
             GPs.Clear();
 
-            bool loaded = false;
 
             if(File.Exists(filepath))
             {
@@ -26,7 +25,6 @@ namespace CrystalReports_G5
                     lines = ReadFile(filepath);
                     FillDataInDict(lines, drivers, rteams, GPs);
                     MessageBox.Show("Archivo " + filepath + " leído correctamente");
-                    loaded = true;
                 }
                 catch (Exception ex)
                 {
