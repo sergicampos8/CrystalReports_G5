@@ -10,8 +10,7 @@ namespace CrystalReports_G5
     {
         public static string gp_name, pilot_name, score, rteam_name,id;
 
-
-        public static bool Load(string filepath, Dictionary<string, string> PointsRecord, Dictionary<string, string> drivers, Dictionary<string, string> rteams, Dictionary<string, string> GPs, List<string> lines)
+        public static List<string> Load(string filepath, Dictionary<string, string> PointsRecord, Dictionary<string, string> drivers, Dictionary<string, string> rteams, Dictionary<string, string> GPs, List<string> lines)
         {
             PointsRecord.Clear();
             drivers.Clear();
@@ -38,7 +37,7 @@ namespace CrystalReports_G5
             {
                 MessageBox.Show("El Archivo seleccionado no existe\n", "Error de Lectura", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            return loaded;
+            return lines;
 
         }
 
