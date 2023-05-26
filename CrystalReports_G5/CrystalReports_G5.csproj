@@ -152,12 +152,37 @@
   <ItemGroup>
     <Folder Include="Circuits\" />
     <Folder Include="fotopilotos\" />
+    <Folder Include="Style\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\f1.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Captura de pantalla 2023-05-18 200701.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\f1logo_gif.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\giphy.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\statistics.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\append.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\csv1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\output-onlinegiftools.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PNG-RGB-72-DPI-F1_RM_Logo_White_Standard_RGB.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

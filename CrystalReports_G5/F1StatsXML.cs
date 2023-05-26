@@ -32,9 +32,13 @@ namespace CrystalReports_G5
 
         // Event handler para el evento "Click" del botón "LoadButton"
         private void LoadButton_Click(object sender, EventArgs e)
-        {
+        {               
+            //Seleccionamos el Path indicado en la FileBox
             string filePath = FileBox.Text.Trim();
+
+            //Cargamos el archivo y lo guardamos en Diccionarios y devolvemos una lista con el XML completo
             lines = LoadData.Load(filePath, PointsRecord, Drivers, RTeams, GPs, lines);
+            //Verificamos si el archivo ha sido cargado correctamente.
             loaded = lines.Count() >= 1;            
         }
 
@@ -84,17 +88,22 @@ namespace CrystalReports_G5
         // Event handler para el evento "Click" del botón "searchbutton"
         private void searchbutton_Click(object sender, EventArgs e)
         {
-            
+            //Verificamos si se ha cargado un archivo   
             if (loaded)
             {
+                //Guardamos las selecciones en variables
                 string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
                 string selection2 = (string)NameMultiBox.SelectedItem;
 
+                //verificamos si se han hecho selecciones en los 2 MultiBox
                 if (selection1 != null && selection2 != null)
                 {
+                    //Seleccionamos lo que debemos sacar por pantalla en función de las selecciones
                     searchList = ShowData.SelectView(selection1, selection2, searchList);
 
+                    //Mostramos en la textBox el resultado
                     ShowData.WriteTextBox(searchList, QueryTextBox);
+                    //Lo guadamos en el archivo indicado
                     SaveFilePath = WriteSearch.SaveListInFile(searchList, SaveFilePath);
                 }
             }
@@ -113,12 +122,14 @@ namespace CrystalReports_G5
         // Event handler para el evento "Click" del botón "appendbutton"
         private void appendbutton_Click(object sender, EventArgs e)
         {
-            // Si hay datos cargados y se han seleccionado valores en los ListBox "TypeEmployeeMultiBox" y "NameMultiBox"
+            //Verificamos si se ha cargado un archivo   
             if (loaded)
-            {                        
+            {
+                //Guardamos las selecciones en variables
                 string selection1 = (string)TypeEmployeeMultiBox.SelectedItem;
                 string selection2 = (string)NameMultiBox.SelectedItem;
 
+                //verificamos si se han hecho selecciones en los 2 MultiBox
                 if (selection1 != null && selection2 != null)
                 {
                     // Se obtienen los resultados de búsqueda según las selecciones realizadas
@@ -126,7 +137,7 @@ namespace CrystalReports_G5
                     searchList = WriteSearch.JoinLists(searchList, appendlist);
 
                     // Se escriben los resultados de búsqueda en el cuadro de texto "QueryTextBox"
-
+                    // Se guardan en el archivo indicado
                     ShowData.WriteTextBox(searchList, QueryTextBox);
                     SaveFilePath = WriteSearch.SaveListInFile(searchList, SaveFilePath);
 
@@ -136,10 +147,15 @@ namespace CrystalReports_G5
 
         private void statisticsbutton_Click(object sender, EventArgs e)
         {
+            //Verificamos si se ha cargado un archivo   
             if (loaded)
             {
+                // Limpiamos la lista
                 searchList.Clear();
+                // Le añadimos las Estadisticas
                 searchList = ShowData.ViewStatistics();
+
+                // La imprimimos por la TextBox y la guardamos en el archivo indicado
                 ShowData.WriteTextBox(searchList, QueryTextBox);
                 SaveFilePath = WriteSearch.SaveListInFile(searchList, SaveFilePath);
             }
