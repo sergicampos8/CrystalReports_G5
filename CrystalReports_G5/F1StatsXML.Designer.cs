@@ -64,11 +64,11 @@ namespace CrystalReports_G5
             // 
             this.Title.AutoSize = true;
             this.Title.BackColor = System.Drawing.Color.Transparent;
-            this.Title.Font = new System.Drawing.Font("ROG Fonts", 22.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Title.Font = new System.Drawing.Font("Impact", 35F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Title.ForeColor = System.Drawing.Color.White;
-            this.Title.Location = new System.Drawing.Point(659, 76);
+            this.Title.Location = new System.Drawing.Point(716, 67);
             this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(674, 46);
+            this.Title.Size = new System.Drawing.Size(597, 71);
             this.Title.TabIndex = 2;
             this.Title.Text = "Grand Prix Information";
             this.Title.Click += new System.EventHandler(this.label2_Click);
