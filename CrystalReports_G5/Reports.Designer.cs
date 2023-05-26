@@ -29,7 +29,6 @@ namespace CrystalReports_G5
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reports));
             this.crystalReportViewer2 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.RacingTeamInfo22 = new CrystalReports_G5.RacingTeamInfo2();
             this.RacingTeamInfo21 = new CrystalReports_G5.RacingTeamInfo2();
@@ -80,7 +79,7 @@ namespace CrystalReports_G5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImage = global::CrystalReports_G5.Properties.Resources._848775;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1229, 722);
             this.Controls.Add(this.button1);

@@ -184,5 +184,11 @@
   <ItemGroup>
     <None Include="Resources\PNG-RGB-72-DPI-F1_RM_Logo_White_Standard_RGB.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\848775.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\f1w.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -63,9 +63,9 @@ namespace CrystalReports_G5.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap append {
+        internal static System.Drawing.Bitmap _848775 {
             get {
-                object obj = ResourceManager.GetObject("append", resourceCulture);
+                object obj = ResourceManager.GetObject("_848775", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace CrystalReports_G5.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Captura_de_pantalla_2023_05_18_200701 {
+        internal static System.Drawing.Bitmap append {
             get {
-                object obj = ResourceManager.GetObject("Captura de pantalla 2023-05-18 200701", resourceCulture);
+                object obj = ResourceManager.GetObject("append", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,29 +93,9 @@ namespace CrystalReports_G5.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap f1 {
+        internal static System.Drawing.Bitmap f1w {
             get {
-                object obj = ResourceManager.GetObject("f1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap giphy {
-            get {
-                object obj = ResourceManager.GetObject("giphy", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap output_onlinegiftools {
-            get {
-                object obj = ResourceManager.GetObject("output_onlinegiftools", resourceCulture);
+                object obj = ResourceManager.GetObject("f1w", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

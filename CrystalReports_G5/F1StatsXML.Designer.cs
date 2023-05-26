@@ -29,7 +29,6 @@ namespace CrystalReports_G5
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F1StatsXML));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Title = new System.Windows.Forms.Label();
             this.LabelFile = new System.Windows.Forms.Label();
@@ -64,11 +63,13 @@ namespace CrystalReports_G5
             // 
             this.Title.AutoSize = true;
             this.Title.BackColor = System.Drawing.Color.Transparent;
-            this.Title.Font = new System.Drawing.Font("Impact", 35F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
+            this.Title.Font = new System.Drawing.Font("Impact", 36F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Title.ForeColor = System.Drawing.Color.White;
-            this.Title.Location = new System.Drawing.Point(716, 67);
+            this.Title.Location = new System.Drawing.Point(709, 76);
             this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(597, 71);
+            this.Title.Size = new System.Drawing.Size(604, 75);
+
             this.Title.TabIndex = 2;
             this.Title.Text = "Grand Prix Information";
             this.Title.Click += new System.EventHandler(this.label2_Click);
@@ -223,7 +224,7 @@ namespace CrystalReports_G5
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImage = global::CrystalReports_G5.Properties.Resources._848775;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1470, 746);
             this.Controls.Add(this.statisticsbutton);
