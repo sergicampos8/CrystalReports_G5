@@ -11,6 +11,7 @@ namespace CrystalReports_G5
         public static string id;
 
         //Funcion destinada a devolver una lista que tenga la búsqueda de los datos de un piloto
+        // HOLA
         public static List<string> DriversView(string pilot_name)
         {
             //Conseguimos la id de el piloto
