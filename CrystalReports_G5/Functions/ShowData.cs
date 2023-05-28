@@ -19,9 +19,9 @@ namespace CrystalReports_G5
             //Declaración de nueva list en la que pondremos el estilo y el nombre del piloto
             List<string> query = new List<string>();
 
-            query.Add("--------------------------------------------------------------------------------------------------");
+            query.Add("----------------------------------------------------------------------------------------------------");
             query.Add(pilot_name);
-            query.Add("--------------------------------------------------------------------------------------------------");
+            query.Add("----------------------------------------------------------------------------------------------------");
 
             //Entraremos en cada linia de nuestro diccionario de puntos ya que el id contiene los datos de GP, Escuderia y Piloto
             foreach (KeyValuePair<string, string> points in F1StatsXML.PointsRecord)
